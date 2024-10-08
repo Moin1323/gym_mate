@@ -3,25 +3,22 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gym_mate/res/assets/image_assets.dart';
 import 'package:gym_mate/res/colors/app_colors.dart';
-import 'package:gym_mate/res/routes/routes_name.dart';
-
-import 'package:gym_mate/utils/utils.dart';
-import 'package:gym_mate/view/auth/signup/signup_view.dart';
-import 'package:gym_mate/view_models/controller/login/login_view_model.dart';
 import 'package:gym_mate/res/components/custom_text_field.dart';
-import 'package:http/http.dart'; // Import the custom text field
+import 'package:gym_mate/res/routes/routes_name.dart';
+import 'package:gym_mate/utils/utils.dart';
+import 'package:gym_mate/view/auth/login/login_view.dart';
+import 'package:gym_mate/view_models/controller/login/login_view_model.dart';
 
-class LoginView extends StatefulWidget {
-  const LoginView({super.key});
+class SignupView extends StatefulWidget {
+  const SignupView({super.key});
 
   @override
-  State<LoginView> createState() => _LoginViewState();
+  State<SignupView> createState() => _SignupViewState();
 }
 
-class _LoginViewState extends State<LoginView> {
-  final loginVM = Get.put(LoginViewModel());
+class _SignupViewState extends State<SignupView> {
+   final loginVM = Get.put(LoginViewModel());
   final formKey = GlobalKey<FormState>();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,23 +44,23 @@ class _LoginViewState extends State<LoginView> {
                 child: Column(
                   
                   children: [
-                    SizedBox(height: 200,),
+                    SizedBox(height: 100,),
                  const   Align(
                        alignment: Alignment.centerLeft,
                        child:   Text(
-                        "Login",style: TextStyle(color: AppColors.secondary,fontSize: 35,fontFamily: 'Satoshi',)
+                        "Signup",style: TextStyle(color: AppColors.secondary,fontSize: 35,fontFamily: 'Satoshi',)
                         
                       ),
 
 
                     ),
                     SizedBox(height:30 ),
-                    // TextField for Email
+                    // TextField for Name
                    
                     CustomTextField(
                       controller: loginVM.emailController.value,
                       focusNode: loginVM.emailFocusNode.value,
-                      labelText: 'Email',
+                      labelText: 'Name',
                       hintText: 'Enter your Email',
                       validator: (value) {
                         if (value!.isEmpty) {
@@ -76,7 +73,40 @@ class _LoginViewState extends State<LoginView> {
                             loginVM.passwordFocusNode.value);
                       },
                     ),
-                    const SizedBox(height: 30),
+                    const SizedBox(height: 25),
+                    
+                    // TextField for Email
+                    CustomTextField(
+                      controller: loginVM.passwordController.value,
+                      focusNode: loginVM.passwordFocusNode.value,
+                      labelText: 'Email',
+                      hintText: 'Enter your email address',
+                      obscureText: true,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "Please enter your email address";
+                        }
+                        return null;
+                      },
+                    ),
+                    const SizedBox(height: 25),
+                    
+                    // TextField for Cnic
+                    CustomTextField(
+                      controller: loginVM.passwordController.value,
+                      focusNode: loginVM.passwordFocusNode.value,
+                      labelText: 'CNIC',
+                      hintText: 'Enter your   CNIC address',
+                      obscureText: true,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "Please enter your CNIC";
+                        }
+                        return null;
+                      },
+                    ),
+                   
+                    const SizedBox(height: 25),
                     
                     // TextField for Password
                     CustomTextField(
@@ -93,15 +123,23 @@ class _LoginViewState extends State<LoginView> {
                       },
                     ),
                    const SizedBox(
-                      height: 10,
+                      height: 25,
                     ),
-const Align(
-                      alignment: Alignment.centerRight,
-                      child: Text(
-                        "Forgot your password?",style: TextStyle(color: AppColors.secondary,fontSize: 16)
-                        
-                      ),
+                    //confirm password 
+                      CustomTextField(
+                      controller: loginVM.passwordController.value,
+                      focusNode: loginVM.passwordFocusNode.value,
+                      labelText: 'Confirm Password',
+                      hintText: 'Enter your password',
+                      obscureText: true,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "Please enter your password";
+                        }
+                        return null;
+                      },
                     ),
+
                     const SizedBox(height: 60),
 
                    
@@ -122,7 +160,7 @@ const Align(
                           return loginVM.loading.value
                               ? const CircularProgressIndicator(color: Colors.white)
                               :const Text(
-                                  'Login',
+                                  'SignUp',
                                   style: TextStyle(color: AppColors.background, fontSize: 20),
                                 );
                         }),
@@ -130,11 +168,11 @@ const Align(
                       SizedBox(height: 10,),
                     RichText(
   text: TextSpan(
-    text: "Don't have an account? ",
+    text: "Already have account ",
     style: TextStyle(color: AppColors.secondary, fontSize: 16),
     children: [
       TextSpan(
-        text: "Signup",
+        text: "Login",
         style:const TextStyle(
           color: Colors.blue, 
           fontSize: 18,
@@ -143,8 +181,9 @@ const Align(
         ),
         recognizer: TapGestureRecognizer()
           ..onTap = () {
-            Get.to(SignupView());
-            //Get.offNamed(RoutesName.signUpView);
+            
+         Get.offNamed(RoutesName
+                .loginView);
          
           },
       ),

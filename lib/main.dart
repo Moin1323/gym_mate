@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gym_mate/res/getx_localization/languages.dart';
 import 'package:gym_mate/res/routes/app_routes.dart';
+import 'package:gym_mate/view/auth/login/login_view.dart';
+import 'package:gym_mate/view/auth/signup/signup_view.dart';
 import 'package:gym_mate/view/splash/splash_view.dart';
 
 void main() {
@@ -19,7 +21,8 @@ class MyApp extends StatelessWidget {
       translations: Languages(),
       locale: const Locale('en', 'US'),
       fallbackLocale: const Locale('en', 'US'),
-      home: const SplashView(),
+      debugShowCheckedModeBanner: false,
+      home: LoginView(),
       getPages: AppRoutes.appRoutes(),
     );
   }
