@@ -31,7 +31,6 @@ class _LoginViewState extends State<LoginView> {
                 focusNode: loginVM.emailFocusNode.value,
                 validator: (value) {
                   if (value!.isEmpty) {
-                    Utils.snackBar("Email", "Enter Email");
                     return "Please enter your email";
                   }
                   return null;
@@ -52,7 +51,6 @@ class _LoginViewState extends State<LoginView> {
                 focusNode: loginVM.passwordFocusNode.value,
                 validator: (value) {
                   if (value!.isEmpty) {
-                    Utils.snackBar("Password", "Enter Password");
                     return "Please enter your password";
                   }
                   return null;
