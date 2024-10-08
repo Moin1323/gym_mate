@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gym_mate/utils/utils.dart';
-import 'package:gym_mate/view_models/controller/login_view_model.dart';
+import 'package:gym_mate/view_models/controller/login/login_view_model.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -32,6 +32,7 @@ class _LoginViewState extends State<LoginView> {
                 validator: (value) {
                   if (value!.isEmpty) {
                     Utils.snackBar("Email", "Enter Email");
+                    return "Please enter your email";
                   }
                   return null;
                 },
@@ -51,7 +52,8 @@ class _LoginViewState extends State<LoginView> {
                 focusNode: loginVM.passwordFocusNode.value,
                 validator: (value) {
                   if (value!.isEmpty) {
-                    Utils.snackBar("Password", "Enter Passowrd");
+                    Utils.snackBar("Password", "Enter Password");
+                    return "Please enter your password";
                   }
                   return null;
                 },
@@ -65,27 +67,16 @@ class _LoginViewState extends State<LoginView> {
                 ),
               ),
               const SizedBox(height: 30),
-              // Assuming you have a login view model using GetX
               ElevatedButton(
                 onPressed: () {
                   if (formKey.currentState!.validate()) {
                     loginVM.loginApi(); // Trigger API call
                   }
                 },
-                style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 40, vertical: 15), // Custom padding
-                  shape: RoundedRectangleBorder(
-                    borderRadius:
-                        BorderRadius.circular(10), // Custom rounded button
-                  ),
-                ),
                 child: Obx(() {
-                  return loginVM
-                          .loading.value // Check if API call is in progress
-                      ? const CircularProgressIndicator(
-                          color: Colors.white) // Show loading spinner
-                      : const Text('Login'); // Default button text
+                  return loginVM.loading.value
+                      ? const CircularProgressIndicator(color: Colors.white)
+                      : const Text('Login');
                 }),
               ),
             ],
