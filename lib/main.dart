@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gym_mate/res/getx_localization/languages.dart';
 import 'package:gym_mate/res/routes/app_routes.dart';
-import 'package:gym_mate/view/auth/login/login_view.dart';
-import 'package:gym_mate/view/auth/signup/signup_view.dart';
+import 'package:gym_mate/res/theme/app_theme.dart';
 import 'package:gym_mate/view/splash/splash_view.dart';
 
 void main() {
@@ -22,7 +21,8 @@ class MyApp extends StatelessWidget {
       locale: const Locale('en', 'US'),
       fallbackLocale: const Locale('en', 'US'),
       debugShowCheckedModeBanner: false,
-      home: LoginView(),
+      theme: AppThemes.myTheme,
+      home: const SplashView(),
       getPages: AppRoutes.appRoutes(),
     );
   }
