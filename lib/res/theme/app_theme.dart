@@ -18,46 +18,36 @@ class AppThemes {
 
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
+        padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 15),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
         backgroundColor: AppColors.primary,
         textStyle: const TextStyle(
           fontSize: 20,
-          fontWeight: FontWeight.bold,
-        ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
+          color: AppColors.background, // Text color
         ),
       ),
     ),
 
     inputDecorationTheme: InputDecorationTheme(
+      fillColor: Colors.grey.withOpacity(0.3),
+      filled: true,
       contentPadding: const EdgeInsets.all(15),
-      hintStyle: const TextStyle(
-        color: Colors.white,
-        fontWeight: FontWeight.w500,
-      ),
-      labelStyle: const TextStyle(
-        color: Colors.black54,
-        fontWeight: FontWeight.w800,
-      ),
+      hintStyle: const TextStyle(color: Colors.white),
+      labelStyle: const TextStyle(color: Colors.white),
       border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(10),
-        borderSide: const BorderSide(
-          color: AppColors.secondary,
-          width: 0.4,
-        ),
+        borderRadius: BorderRadius.circular(12),
       ),
       enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(10),
-        borderSide: const BorderSide(
-          color: AppColors.secondary,
-          width: 0.4,
-        ),
+        borderRadius: BorderRadius.circular(12),
+        borderSide: BorderSide(
+            color: Colors.grey.withOpacity(.5)), // Color when enabled
       ),
       focusedBorder: OutlineInputBorder(
-        borderSide: const BorderSide(
-          color: AppColors.primary,
-        ),
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(12),
+        borderSide:
+            const BorderSide(color: AppColors.primary), // Color when focused
       ),
     ),
   );
