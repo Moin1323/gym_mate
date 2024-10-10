@@ -16,7 +16,7 @@ class ApiResponse<T> {
   ApiResponse.error(this.message) : status = Status.ERROR;
 
   @override
-  String toSting() {
+  String toString() {
     return "Status : $status \nMessage : $message \nData : $data";
   }
 }
