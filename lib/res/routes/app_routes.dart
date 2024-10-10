@@ -3,8 +3,9 @@ import 'package:get/get_navigation/src/routes/transitions_type.dart';
 import 'package:gym_mate/res/routes/routes_name.dart';
 import 'package:gym_mate/view/auth/login/login_view.dart';
 import 'package:gym_mate/view/auth/signup/signup_view.dart';
-import 'package:gym_mate/view/home/home_view.dart';
 import 'package:gym_mate/view/splash/splash_view.dart';
+
+import '../../view/dashboard/home/home_view.dart';
 
 class AppRoutes {
   static appRoutes() => [
@@ -28,7 +29,7 @@ class AppRoutes {
         ),
         GetPage(
           name: RoutesName.homeView,
-          page: () => const HomeView(),
+          page: () => HomeView(),
           transitionDuration: const Duration(milliseconds: 250),
           transition: Transition.leftToRightWithFade,
         ),
