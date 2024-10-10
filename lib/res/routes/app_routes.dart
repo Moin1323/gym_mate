@@ -29,7 +29,7 @@ class AppRoutes {
         ),
         GetPage(
           name: RoutesName.homeView,
-          page: () => HomeView(),
+          page: () => const HomeView(),
           transitionDuration: const Duration(milliseconds: 250),
           transition: Transition.leftToRightWithFade,
         ),

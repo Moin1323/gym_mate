@@ -28,15 +28,27 @@ class CustomTextField extends StatelessWidget {
       focusNode: focusNode,
       obscureText: obscureText,
       validator: validator,
-      style: const TextStyle(
-        color: AppColors.secondary, // Custom text color
-        fontSize: 18,
-      ),
+      style: const TextStyle(color: AppColors.secondary, fontSize: 18), // Text color
       onFieldSubmitted: onFieldSubmitted,
       decoration: InputDecoration(
         labelText: labelText,
+        labelStyle: const TextStyle(color: Colors.white),
         hintText: hintText,
-        // Do not call applyDefaults here. It will inherit the global theme
+        hintStyle: const TextStyle(color: Colors.white), 
+        filled: true,
+        fillColor: Colors.grey.withOpacity(0.3), 
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+        
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: const BorderSide(color: AppColors.primary), // Color when focused
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide:  BorderSide(color: Colors.grey.withOpacity(.5)), // Color when enabled
+        ),
       ),
     );
   }
