@@ -3,7 +3,10 @@ import 'package:get/get.dart';
 import 'package:gym_mate/res/getx_localization/languages.dart';
 import 'package:gym_mate/res/routes/app_routes.dart';
 import 'package:gym_mate/res/theme/app_theme.dart';
-import 'package:gym_mate/view/splash/splash_view.dart';
+import 'package:gym_mate/view/home/Exercieses/cardio_exercise_view.dart';
+import 'package:gym_mate/view/home/Exercieses/excersice_datail.dart';
+import 'package:gym_mate/view/home/Exercieses/main_exercises_view.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -22,7 +25,7 @@ class MyApp extends StatelessWidget {
       fallbackLocale: const Locale('en', 'US'),
       debugShowCheckedModeBanner: false,
       theme: AppThemes.myTheme,
-      home: const SplashView(),
+      home:CardioExersiseView(),
       getPages: AppRoutes.appRoutes(),
     );
   }

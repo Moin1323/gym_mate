@@ -17,13 +17,13 @@ class SignupView extends StatefulWidget {
 }
 
 class _SignupViewState extends State<SignupView> {
-  final loginVM = Get.put(LoginViewModel());
+   final loginVM = Get.put(LoginViewModel());
   final formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: false, 
       body: Stack(
         children: [
           // Background Image
@@ -31,7 +31,7 @@ class _SignupViewState extends State<SignupView> {
             decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage(ImageAssets.background),
-                fit: BoxFit.cover,
+                fit: BoxFit.cover, 
               ),
             ),
           ),
@@ -48,17 +48,17 @@ class _SignupViewState extends State<SignupView> {
 
                     // Signup Heading
                     const Align(
-                      alignment: Alignment.centerLeft,
+                       alignment: Alignment.centerLeft,
                       child: Text(
                         "Signup",
                         style: TextStyle(
                           color: AppColors.secondary,
                           fontSize: 35,
-                        ),
+                      ),
                       ),
                     ),
                     const SizedBox(height: 30),
-
+                   
                     // Name Field
                     CustomTextField(
                       controller: loginVM.emailController.value,
@@ -80,7 +80,7 @@ class _SignupViewState extends State<SignupView> {
                       },
                     ),
                     const SizedBox(height: 25),
-
+                    
                     // Email Field
                     CustomTextField(
                       controller: loginVM.emailController.value,
@@ -95,7 +95,7 @@ class _SignupViewState extends State<SignupView> {
                       },
                     ),
                     const SizedBox(height: 25),
-
+                    
                     // CNIC Field
                     CustomTextField(
                       controller: loginVM.passwordController.value,
@@ -109,9 +109,10 @@ class _SignupViewState extends State<SignupView> {
                         return null;
                       },
                     ),
+                   
                     const SizedBox(height: 25),
-
-                    // Password Field
+                    
+                    // TextField for Password
                     CustomTextField(
                       controller: loginVM.passwordController.value,
                       focusNode: loginVM.passwordFocusNode.value,
@@ -125,10 +126,11 @@ class _SignupViewState extends State<SignupView> {
                         return null;
                       },
                     ),
-                    const SizedBox(height: 25),
-
-                    // Confirm Password Field
-                    CustomTextField(
+                   const SizedBox(
+                      height: 25,
+                    ),
+                    //confirm password 
+                      CustomTextField(
                       controller: loginVM.passwordController.value,
                       focusNode: loginVM.passwordFocusNode.value,
                       labelText: 'Confirm Password',
@@ -136,52 +138,62 @@ class _SignupViewState extends State<SignupView> {
                       obscureText: true,
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return "Please confirm your password";
+                          return "Please enter your password";
                         }
                         return null;
                       },
                     ),
+
                     const SizedBox(height: 60),
 
-                    // Sign Up Button (Using CustomPrimaryButton)
-                    Obx(() {
-                      return CustomPrimaryButton(
-                        text: 'SignUp',
-                        isLoading: loginVM.loading.value,
+                   
+                    ElevatedButton(
                         onPressed: () {
                           if (formKey.currentState!.validate()) {
                             loginVM.loginApi();
                           }
                         },
-                      );
-                    }),
-                    const SizedBox(height: 10),
-
-                    // Login Link
-                    RichText(
-                      text: TextSpan(
-                        text: "Already have an account? ",
-                        style: const TextStyle(
-                          color: AppColors.secondary,
-                          fontSize: 16,
-                        ),
-                        children: [
-                          TextSpan(
-                            text: "Login",
-                            style: const TextStyle(
-                              color: Colors.blue,
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              decoration: TextDecoration.underline,
-                            ),
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () {
-                                Get.offNamed(RoutesName.loginView);
-                              },
+                        style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 15),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
                           ),
-                        ],
+                          backgroundColor: AppColors.primary,
+                        ),
+                        child: Obx(() {
+                          return loginVM.loading.value
+                              ? const CircularProgressIndicator(color: Colors.white)
+                              :const Text(
+                                  'SignUp',
+                                  style: TextStyle(color: AppColors.background, fontSize: 20),
+                                );
+                        }),
                       ),
-                    ),
+                      const SizedBox(height: 10,),
+                    RichText(
+  text: TextSpan(
+    text: "Already have account ",
+    style: const TextStyle(color: AppColors.secondary, fontSize: 16),
+    children: [
+      TextSpan(
+        text: "Login",
+        style:const TextStyle(
+          color: Colors.blue, 
+          fontSize: 18,
+          fontWeight: FontWeight.bold, 
+          decoration: TextDecoration.underline, 
+        ),
+        recognizer: TapGestureRecognizer()
+          ..onTap = () {
+            
+         Get.offNamed(RoutesName
+                .loginView);
+         
+          },
+      ),
+    ],
+  ),
+)
                   ],
                 ),
               ),
