@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
       fallbackLocale: const Locale('en', 'US'),
       debugShowCheckedModeBanner: false,
       theme: AppThemes.myTheme,
-      home: SplashView(),
+      home: const SplashView(),
       getPages: AppRoutes.appRoutes(),
     );
   }
