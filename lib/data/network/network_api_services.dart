@@ -22,7 +22,6 @@ class NetworkApiServices extends BaseApiServices {
     } on RequestTimOut {
       throw RequestTimOut();
     }
-
     return responseJson;
   }
 
@@ -36,16 +35,13 @@ class NetworkApiServices extends BaseApiServices {
         return responseJson;
       default:
         throw FetchDataException(
-            "Error occured while fetching data from server.\nStatus Code : ${response.statusCode.toString()}");
+          "Error occurred while communicating with server. Status Code: ${response.statusCode}",
+        );
     }
   }
 
   @override
   Future<dynamic> postApi(var data, String url) async {
-    if (kDebugMode) {
-      print(data);
-      print(url);
-    }
     dynamic responseJson;
     try {
       final response = await http
@@ -54,6 +50,7 @@ class NetworkApiServices extends BaseApiServices {
             body: data,
           )
           .timeout(const Duration(seconds: 10));
+
       responseJson = returnResponse(response);
     } on SocketException {
       throw InternetException();
@@ -61,9 +58,7 @@ class NetworkApiServices extends BaseApiServices {
       throw RequestTimOut();
     }
 
-    if (kDebugMode) {
-      print(responseJson);
-    }
+    print(responseJson);
     return responseJson;
   }
 }
