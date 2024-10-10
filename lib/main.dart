@@ -6,6 +6,9 @@ import 'package:gym_mate/res/theme/app_theme.dart';
 import 'package:gym_mate/view/splash/splash_view.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+import 'package:gym_mate/view/home/Exercieses/cardio_exercise_view.dart';
+import 'package:gym_mate/view/home/Exercieses/excersice_datail.dart';
+import 'package:gym_mate/view/home/Exercieses/main_exercises_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,7 +31,7 @@ class MyApp extends StatelessWidget {
       fallbackLocale: const Locale('en', 'US'),
       debugShowCheckedModeBanner: false,
       theme: AppThemes.myTheme,
-      home: const SplashView(),
+      home:CardioExersiseView(),
       getPages: AppRoutes.appRoutes(),
     );
   }

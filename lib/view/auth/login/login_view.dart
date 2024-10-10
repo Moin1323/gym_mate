@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gym_mate/res/assets/image_assets.dart';
 import 'package:gym_mate/res/colors/app_colors.dart';
-import 'package:gym_mate/res/components/custom_primary_button.dart';
+import 'package:gym_mate/res/routes/routes_name.dart';
+
 import 'package:gym_mate/utils/utils.dart';
 import 'package:gym_mate/view/auth/signup/signup_view.dart';
 import 'package:gym_mate/view_models/controller/login/login_view_model.dart';
 import 'package:gym_mate/res/components/custom_text_field.dart';
+import 'package:http/http.dart'; // Import the custom text field
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -23,17 +25,19 @@ class _LoginViewState extends State<LoginView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: false, 
       body: Stack(
         children: [
+
           Container(
-            decoration: const BoxDecoration(
+            decoration:const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage(ImageAssets.background),
-                fit: BoxFit.cover,
+                fit: BoxFit.cover, 
               ),
             ),
           ),
+          
           Container(
             color: AppColors.background.withOpacity(.7),
             child: Padding(
@@ -41,21 +45,21 @@ class _LoginViewState extends State<LoginView> {
               child: Form(
                 key: formKey,
                 child: Column(
+                  
                   children: [
-                    const SizedBox(
-                      height: 200,
-                    ),
-                    const Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text("Login",
-                          style: TextStyle(
-                            color: AppColors.secondary,
-                            fontSize: 35,
-                          )),
-                    ),
-                    const SizedBox(height: 30),
-                    // TextField for Email
+                    const SizedBox(height: 200,),
+                 const   Align(
+                       alignment: Alignment.centerLeft,
+                       child:   Text(
+                        "Login",style: TextStyle(color: AppColors.secondary,fontSize: 35,fontFamily: 'Satoshi',)
+                        
+                      ),
 
+
+                    ),
+                    const SizedBox(height:30 ),
+                    // TextField for Email
+                   
                     CustomTextField(
                       controller: loginVM.emailController.value,
                       focusNode: loginVM.emailFocusNode.value,
@@ -68,14 +72,12 @@ class _LoginViewState extends State<LoginView> {
                         return null;
                       },
                       onFieldSubmitted: (value) {
-                        Utils.fieldFocusChange(
-                            context,
-                            loginVM.emailFocusNode.value,
+                        Utils.fieldFocusChange(context, loginVM.emailFocusNode.value,
                             loginVM.passwordFocusNode.value);
                       },
                     ),
                     const SizedBox(height: 30),
-
+                    
                     // TextField for Password
                     CustomTextField(
                       controller: loginVM.passwordController.value,
@@ -90,53 +92,65 @@ class _LoginViewState extends State<LoginView> {
                         return null;
                       },
                     ),
-                    const SizedBox(
+                   const SizedBox(
                       height: 10,
                     ),
-                    const Align(
+const Align(
                       alignment: Alignment.centerRight,
-                      child: Text("Forgot your password?",
-                          style: TextStyle(
-                              color: AppColors.secondary, fontSize: 16)),
+                      child: Text(
+                        "Forgot your password?",style: TextStyle(color: AppColors.secondary,fontSize: 16)
+                        
+                      ),
                     ),
                     const SizedBox(height: 60),
 
-                    CustomPrimaryButton(
-                      text: 'Login',
-                      isLoading: loginVM.loading.value,
-                      onPressed: () {
-                        if (formKey.currentState!.validate()) {
-                          loginVM.loginApi();
-                        }
-                      },
-                    ),
-
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    RichText(
-                      text: TextSpan(
-                        text: "Don't have an account? ",
-                        style: const TextStyle(
-                            color: AppColors.secondary, fontSize: 16),
-                        children: [
-                          TextSpan(
-                            text: "Signup",
-                            style: const TextStyle(
-                              color: Colors.blue,
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              decoration: TextDecoration.underline,
-                            ),
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () {
-                                Get.to(const SignupView());
-                                //Get.offNamed(RoutesName.signUpView);
-                              },
+                   
+                    ElevatedButton(
+                        onPressed: () {
+                          if (formKey.currentState!.validate()) {
+                            loginVM.loginApi();
+                          }
+                        },
+                        style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 15),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
                           ),
-                        ],
+                          backgroundColor: AppColors.primary,
+                        ),
+                        child: Obx(() {
+                          return loginVM.loading.value
+                              ? const CircularProgressIndicator(color: Colors.white)
+                              :const Text(
+                                  'Login',
+                                  style: TextStyle(color: AppColors.background, fontSize: 20),
+                                );
+                        }),
                       ),
-                    )
+                      const SizedBox(height: 10,),
+                    RichText(
+  text: TextSpan(
+    text: "Don't have an account? ",
+    style: const TextStyle(color: AppColors.secondary, fontSize: 16),
+    children: [
+      TextSpan(
+        text: "Signup",
+        style:const TextStyle(
+          color: Colors.blue, 
+          fontSize: 18,
+          fontWeight: FontWeight.bold, 
+          decoration: TextDecoration.underline, 
+        ),
+        recognizer: TapGestureRecognizer()
+          ..onTap = () {
+            Get.to(const SignupView());
+            //Get.offNamed(RoutesName.signUpView);
+         
+          },
+      ),
+    ],
+  ),
+)
                   ],
                 ),
               ),
