@@ -43,6 +43,7 @@ dependencies:
   firebase_auth: ^5.3.1
   cloud_firestore: ^5.4.4
   firebase_storage: ^12.3.3
+  iconsax: ^0.0.8
 
 dev_dependencies:
   flutter_test:
@@ -68,8 +69,10 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
+    - lib/assets/images/cardio2.png
     - lib/assets/images/
     - lib/assets/images/animations/
+
     
 
   # An image asset can refer to one or more resolution-specific "variants", see
