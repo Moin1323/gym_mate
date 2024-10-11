@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gym_mate/res/assets/image_assets.dart';
 import 'package:gym_mate/res/colors/app_colors.dart';
+import 'package:gym_mate/res/components/cnic_formatter.dart';
 import 'package:gym_mate/res/components/custom_text_field.dart';
 import 'package:gym_mate/res/routes/routes_name.dart';
 import 'package:gym_mate/utils/utils.dart';
-import 'package:gym_mate/view_models/controller/login/login_view_model.dart';
+import 'package:gym_mate/view_models/controller/signup/signup_view_model.dart';
 
 class SignupView extends StatefulWidget {
   const SignupView({super.key});
@@ -16,7 +17,7 @@ class SignupView extends StatefulWidget {
 }
 
 class _SignupViewState extends State<SignupView> {
-  final loginVM = Get.put(LoginViewModel());
+  final signupVM = Get.put(SignupViewModel());
   final formKey = GlobalKey<FormState>();
 
   @override
@@ -60,8 +61,8 @@ class _SignupViewState extends State<SignupView> {
 
                     // Name Field
                     CustomTextField(
-                      controller: loginVM.emailController.value,
-                      focusNode: loginVM.emailFocusNode.value,
+                      controller: signupVM.nameController,
+                      focusNode: signupVM.nameFocus,
                       labelText: 'Name',
                       hintText: 'Enter your Name',
                       validator: (value) {
@@ -73,17 +74,17 @@ class _SignupViewState extends State<SignupView> {
                       onFieldSubmitted: (value) {
                         Utils.fieldFocusChange(
                           context,
-                          loginVM.emailFocusNode.value,
-                          loginVM.passwordFocusNode.value,
+                          signupVM.nameFocus,
+                          signupVM.emailFocus,
                         );
-                      },
+                      }, inputFormatters: [],
                     ),
                     const SizedBox(height: 25),
 
                     // Email Field
                     CustomTextField(
-                      controller: loginVM.emailController.value,
-                      focusNode: loginVM.emailFocusNode.value,
+                      controller: signupVM.emailController,
+                      focusNode: signupVM.emailFocus,
                       labelText: 'Email',
                       hintText: 'Enter your email address',
                       validator: (value) {
@@ -91,30 +92,36 @@ class _SignupViewState extends State<SignupView> {
                           return "Please enter your email address";
                         }
                         return null;
-                      },
+                      }, inputFormatters: [],
                     ),
                     const SizedBox(height: 25),
 
                     // CNIC Field
-                    CustomTextField(
-                      controller: loginVM.passwordController.value,
-                      focusNode: loginVM.passwordFocusNode.value,
-                      labelText: 'CNIC',
-                      hintText: 'Enter your CNIC',
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Please enter your CNIC";
-                        }
-                        return null;
-                      },
-                    ),
+                  // CNIC Field
+CustomTextField(
+  controller: signupVM.cnicController,
+  focusNode: signupVM.cnicFocus,
+  labelText: 'CNIC',
+  hintText: 'Enter your CNIC',
+  validator: (value) {
+    if (value!.isEmpty) {
+      return "Please enter your CNIC";
+    }
+    if (value.length != 15) {
+      return "CNIC must be 14 characters including dashes";
+    }
+    return null;
+  },
+  inputFormatters: [CnicInputFormatter()], // Add the input formatter here
+),
+
 
                     const SizedBox(height: 25),
 
-                    // TextField for Password
+                    // Password Field
                     CustomTextField(
-                      controller: loginVM.passwordController.value,
-                      focusNode: loginVM.passwordFocusNode.value,
+                      controller: signupVM.passwordController,
+                      focusNode: signupVM.passwordFocus,
                       labelText: 'Password',
                       hintText: 'Enter your password',
                       obscureText: true,
@@ -123,32 +130,34 @@ class _SignupViewState extends State<SignupView> {
                           return "Please enter your password";
                         }
                         return null;
-                      },
+                      }, inputFormatters: [],
                     ),
-                    const SizedBox(
-                      height: 25,
-                    ),
-                    //confirm password
+                    const SizedBox(height: 25),
+
+                    // Confirm Password Field
                     CustomTextField(
-                      controller: loginVM.passwordController.value,
-                      focusNode: loginVM.passwordFocusNode.value,
+                      controller: signupVM.confirmPasswordController,
+                      focusNode: signupVM.confirmPasswordFocus,
                       labelText: 'Confirm Password',
-                      hintText: 'Enter your password',
+                      hintText: 'Re-enter your password',
                       obscureText: true,
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return "Please enter your password";
+                          return "Please confirm your password";
+                        }
+                        if (value != signupVM.passwordController.text) {
+                          return "Passwords do not match";
                         }
                         return null;
-                      },
+                      }, inputFormatters: [],
                     ),
-
                     const SizedBox(height: 60),
 
+                    // SignUp Button
                     ElevatedButton(
                       onPressed: () {
                         if (formKey.currentState!.validate()) {
-                          loginVM.loginApi();
+                          signupVM.register();
                         }
                       },
                       style: ElevatedButton.styleFrom(
@@ -160,7 +169,7 @@ class _SignupViewState extends State<SignupView> {
                         backgroundColor: AppColors.primary,
                       ),
                       child: Obx(() {
-                        return loginVM.loading.value
+                        return signupVM.loading.value
                             ? const CircularProgressIndicator(
                                 color: Colors.white)
                             : const Text(
@@ -170,12 +179,12 @@ class _SignupViewState extends State<SignupView> {
                               );
                       }),
                     ),
-                    const SizedBox(
-                      height: 10,
-                    ),
+                    const SizedBox(height: 10),
+
+                    // Login Redirect
                     RichText(
                       text: TextSpan(
-                        text: "Already have account ",
+                        text: "Already have an account? ",
                         style: const TextStyle(
                             color: AppColors.secondary, fontSize: 16),
                         children: [

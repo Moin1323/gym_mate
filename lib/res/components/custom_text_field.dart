@@ -18,7 +18,7 @@ class CustomTextField extends StatelessWidget {
     required this.hintText,
     this.obscureText = false,
     this.validator,
-    this.onFieldSubmitted,
+    this.onFieldSubmitted, required List<dynamic> inputFormatters,
   });
 
   @override

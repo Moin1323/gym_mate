@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gym_mate/res/assets/image_assets.dart';
 import 'package:gym_mate/res/colors/app_colors.dart';
-
 import 'package:gym_mate/utils/utils.dart';
 import 'package:gym_mate/view/auth/signup/signup_view.dart';
 import 'package:gym_mate/view_models/controller/login/login_view_model.dart';
@@ -26,6 +25,7 @@ class _LoginViewState extends State<LoginView> {
       resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
+          // Background Image
           Container(
             decoration: const BoxDecoration(
               image: DecorationImage(
@@ -34,6 +34,7 @@ class _LoginViewState extends State<LoginView> {
               ),
             ),
           ),
+          // Transparent overlay
           Container(
             color: AppColors.background.withOpacity(.7),
             child: Padding(
@@ -42,9 +43,8 @@ class _LoginViewState extends State<LoginView> {
                 key: formKey,
                 child: Column(
                   children: [
-                    const SizedBox(
-                      height: 200,
-                    ),
+                    const SizedBox(height: 200),
+                    // Title: Login
                     const Align(
                       alignment: Alignment.centerLeft,
                       child: Text("Login",
@@ -55,8 +55,7 @@ class _LoginViewState extends State<LoginView> {
                           )),
                     ),
                     const SizedBox(height: 30),
-                    // TextField for Email
-
+                    // Email TextField
                     CustomTextField(
                       controller: loginVM.emailController.value,
                       focusNode: loginVM.emailFocusNode.value,
@@ -70,14 +69,14 @@ class _LoginViewState extends State<LoginView> {
                       },
                       onFieldSubmitted: (value) {
                         Utils.fieldFocusChange(
-                            context,
-                            loginVM.emailFocusNode.value,
-                            loginVM.passwordFocusNode.value);
-                      },
+                          context,
+                          loginVM.emailFocusNode.value,
+                          loginVM.passwordFocusNode.value,
+                        );
+                      }, inputFormatters: [],
                     ),
                     const SizedBox(height: 30),
-
-                    // TextField for Password
+                    // Password TextField
                     CustomTextField(
                       controller: loginVM.passwordController.value,
                       focusNode: loginVM.passwordFocusNode.value,
@@ -89,19 +88,19 @@ class _LoginViewState extends State<LoginView> {
                           return "Please enter your password";
                         }
                         return null;
-                      },
+                      }, inputFormatters: [],
                     ),
-                    const SizedBox(
-                      height: 10,
-                    ),
+                    const SizedBox(height: 10),
+                    // Forgot Password
                     const Align(
                       alignment: Alignment.centerRight,
-                      child: Text("Forgot your password?",
-                          style: TextStyle(
-                              color: AppColors.secondary, fontSize: 16)),
+                      child: Text(
+                        "Forgot your password?",
+                        style: TextStyle(color: AppColors.secondary, fontSize: 16),
+                      ),
                     ),
                     const SizedBox(height: 60),
-
+                    // Login Button
                     ElevatedButton(
                       onPressed: () {
                         if (formKey.currentState!.validate()) {
@@ -109,8 +108,7 @@ class _LoginViewState extends State<LoginView> {
                         }
                       },
                       style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 100, vertical: 15),
+                        padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 15),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
@@ -118,23 +116,19 @@ class _LoginViewState extends State<LoginView> {
                       ),
                       child: Obx(() {
                         return loginVM.loading.value
-                            ? const CircularProgressIndicator(
-                                color: Colors.white)
+                            ? const CircularProgressIndicator(color: Colors.white)
                             : const Text(
                                 'Login',
-                                style: TextStyle(
-                                    color: AppColors.background, fontSize: 20),
+                                style: TextStyle(color: AppColors.background, fontSize: 20),
                               );
                       }),
                     ),
-                    const SizedBox(
-                      height: 10,
-                    ),
+                    const SizedBox(height: 10),
+                    // Signup Redirect
                     RichText(
                       text: TextSpan(
                         text: "Don't have an account? ",
-                        style: const TextStyle(
-                            color: AppColors.secondary, fontSize: 16),
+                        style: const TextStyle(color: AppColors.secondary, fontSize: 16),
                         children: [
                           TextSpan(
                             text: "Signup",
@@ -147,7 +141,6 @@ class _LoginViewState extends State<LoginView> {
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
                                 Get.to(const SignupView());
-                                //Get.offNamed(RoutesName.signUpView);
                               },
                           ),
                         ],
