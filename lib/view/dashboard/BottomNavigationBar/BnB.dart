@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gym_mate/view/dashboard/home/widgets/Search.dart';
+import 'package:gym_mate/view/search/search_filter/search_view/search_view.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../home/home_view.dart';
@@ -28,7 +29,7 @@ class _BnbState extends State<Bnb> {
   // List of screens
   final List<Widget> _screens = [
     HomeView(), // HomeView screen
-    Search(), // SearchView screen
+    SearchView(), // SearchView screen
     Search(), // SettingsView screen
   ];
 
