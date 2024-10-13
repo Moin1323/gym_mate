@@ -1,6 +1,10 @@
-import 'package:gym_mate/view/dashboard/BottomNavigationBar/BnB.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:gym_mate/view/auth/login/login_view.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:gym_mate/res/getx_localization/languages.dart';
+import 'package:gym_mate/res/routes/app_routes.dart';
+import 'package:gym_mate/res/theme/app_theme.dart';
+import 'package:gym_mate/view/splash/splash_view.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -24,7 +28,7 @@ class MyApp extends StatelessWidget {
       fallbackLocale: const Locale('en', 'US'),
       debugShowCheckedModeBanner: false,
       theme: AppThemes.myTheme,
-      home: const LoginView(),
+      home: const SplashView(),
       getPages: AppRoutes.appRoutes(),
     );
   }

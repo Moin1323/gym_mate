@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:gym_mate/view/dashboard/home/widgets/Search.dart';
 import 'package:gym_mate/view/search/search_filter/search_view/search_view.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -28,9 +27,9 @@ class _BnbState extends State<Bnb> {
 
   // List of screens
   final List<Widget> _screens = [
-    const HomeView(), // HomeView screen
-    const Search(), // SearchView screen
-    const Search(), // SettingsView screen
+    const HomeView(),
+    const SearchView(),
+    const SettingsView(), // Placeholder for the settings screen
   ];
 
   @override
@@ -58,7 +57,8 @@ class _BnbState extends State<Bnb> {
           ],
           currentIndex: homeController
               .currentIndex.value, // Current index from HomeController
-          selectedItemColor: const Color(0xFFA3EC3E), // Color for the selected item
+          selectedItemColor:
+              const Color(0xFFA3EC3E), // Color for the selected item
           unselectedItemColor: Colors.white, // Color for unselected items
           backgroundColor: const Color(
               0xFF000000), // Background color of the Bottom Navigation Bar
@@ -68,6 +68,18 @@ class _BnbState extends State<Bnb> {
           type: BottomNavigationBarType.fixed,
         );
       }),
+    );
+  }
+}
+
+// Placeholder for SettingsView
+class SettingsView extends StatelessWidget {
+  const SettingsView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Center(
+      child: Text('Settings Screen'),
     );
   }
 }

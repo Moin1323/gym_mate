@@ -4,7 +4,7 @@ import 'package:gym_mate/view/dashboard/home/widgets/Model.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../../../res/colors/app_colors.dart';
-import 'tb_component.dart';
+import 'widgets/tb_component.dart';
 import 'widgets/exercise_component.dart';
 
 class HomeView extends StatefulWidget {
