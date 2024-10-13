@@ -9,7 +9,7 @@ class MainExercisesView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
- leading: Icon(Icons.menu,color: Colors.white,size: 30,),
+ leading: const Icon(Icons.menu,color: Colors.white,size: 30,),
         backgroundColor: AppColors.background,
  title: const Text(
           "Exercises",
@@ -39,7 +39,7 @@ class MainExercisesView extends StatelessWidget {
                 child:  Align(
                   alignment: Alignment.bottomLeft,
                   child: Padding(
-                    padding: EdgeInsets.only(left: 15.0,bottom: 10),
+                    padding: const EdgeInsets.only(left: 15.0,bottom: 10),
                     child: Row(
                       children: [
                      

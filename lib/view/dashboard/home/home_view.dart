@@ -223,7 +223,7 @@ class _HomeViewState extends State<HomeView> {
                 height: Get.height * 0.1,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
-                  color: Color(0xFF191919),
+                  color: const Color(0xFF191919),
                 ),
               )
             ],

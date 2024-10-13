@@ -5,10 +5,10 @@ class TabrComponent extends StatelessWidget {
   final String label; // Text label for the tab
 
   const TabrComponent({
-    Key? key,
+    super.key,
     required this.imageAsset,
     required this.label,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class TabrComponent extends StatelessWidget {
         height: 60, // Height of the container
         width: 120, // Width of the container
         decoration: BoxDecoration(
-          color: Color(0xFF191919), // Background color for the container
+          color: const Color(0xFF191919), // Background color for the container
           borderRadius: BorderRadius.circular(30), // Rounded corners
         ),
         child: Padding(
