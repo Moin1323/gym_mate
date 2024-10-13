@@ -2,8 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gym_mate/repository/login_repository/login_repository.dart';
-import 'package:gym_mate/res/routes/routes_name.dart';
-import 'package:gym_mate/utils/utils.dart';
 import 'package:gym_mate/view/dashboard/Exercieses/main_exercises_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -35,7 +33,7 @@ class LoginViewModel extends GetxController {
         );
         await _saveLoginStatus(true);
         clearFields();
-        Get.offAll(() => MainExercisesView()); // Redirect to main view
+        Get.offAll(() => const MainExercisesView()); // Redirect to main view
       } on FirebaseAuthException catch (e) {
         Get.snackbar(
           'Error',
@@ -88,7 +86,7 @@ class LoginViewModel extends GetxController {
     bool isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
 
     if (isLoggedIn && getCurrentUser() != null) {
-      Get.offAll(() => MainExercisesView());
+      Get.offAll(() => const MainExercisesView());
     }
   }
 }

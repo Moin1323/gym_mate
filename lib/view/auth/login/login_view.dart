@@ -73,7 +73,8 @@ class _LoginViewState extends State<LoginView> {
                           loginVM.emailFocusNode.value,
                           loginVM.passwordFocusNode.value,
                         );
-                      }, inputFormatters: [],
+                      },
+                      inputFormatters: const [],
                     ),
                     const SizedBox(height: 30),
                     // Password TextField
@@ -88,7 +89,8 @@ class _LoginViewState extends State<LoginView> {
                           return "Please enter your password";
                         }
                         return null;
-                      }, inputFormatters: [],
+                      },
+                      inputFormatters: const [],
                     ),
                     const SizedBox(height: 10),
                     // Forgot Password
@@ -96,7 +98,8 @@ class _LoginViewState extends State<LoginView> {
                       alignment: Alignment.centerRight,
                       child: Text(
                         "Forgot your password?",
-                        style: TextStyle(color: AppColors.secondary, fontSize: 16),
+                        style:
+                            TextStyle(color: AppColors.secondary, fontSize: 16),
                       ),
                     ),
                     const SizedBox(height: 60),
@@ -108,7 +111,8 @@ class _LoginViewState extends State<LoginView> {
                         }
                       },
                       style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 15),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 100, vertical: 15),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
@@ -116,10 +120,12 @@ class _LoginViewState extends State<LoginView> {
                       ),
                       child: Obx(() {
                         return loginVM.loading.value
-                            ? const CircularProgressIndicator(color: Colors.white)
+                            ? const CircularProgressIndicator(
+                                color: Colors.white)
                             : const Text(
                                 'Login',
-                                style: TextStyle(color: AppColors.background, fontSize: 20),
+                                style: TextStyle(
+                                    color: AppColors.background, fontSize: 20),
                               );
                       }),
                     ),
@@ -128,7 +134,8 @@ class _LoginViewState extends State<LoginView> {
                     RichText(
                       text: TextSpan(
                         text: "Don't have an account? ",
-                        style: const TextStyle(color: AppColors.secondary, fontSize: 16),
+                        style: const TextStyle(
+                            color: AppColors.secondary, fontSize: 16),
                         children: [
                           TextSpan(
                             text: "Signup",
