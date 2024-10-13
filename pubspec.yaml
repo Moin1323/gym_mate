@@ -44,6 +44,7 @@ dependencies:
   cloud_firestore: ^5.4.4
   firebase_storage: ^12.3.3
   iconsax: ^0.0.8
+  firebase_database: ^11.1.4
 
 dev_dependencies:
   flutter_test:
