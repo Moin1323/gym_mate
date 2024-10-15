@@ -35,10 +35,8 @@ class _SettingsViewState extends State<SettingsView> {
                   radius: 50,
                   child: ClipOval(
                     child: Image.asset(
-                      'lib/assets/images/User_img3.jpg',
+                      'lib/assets/images/user_Logox.png',
                       fit: BoxFit.cover,
-                      width: Get.width * 0.25,
-                      height: Get.height * 0.25,
                     ),
                   ),
                 ),
@@ -59,12 +57,12 @@ class _SettingsViewState extends State<SettingsView> {
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: const Padding(
-                    padding: EdgeInsets.all(4.0),
+                    padding: EdgeInsets.all(5.0),
                     child: Center(
                       child: Text(
                         '👑 Id: 1237',
                         style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.bold),
+                            fontSize: 12, fontWeight: FontWeight.bold),
                         textAlign: TextAlign.center,
                       ),
                     ),

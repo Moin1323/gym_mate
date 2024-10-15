@@ -4,6 +4,7 @@ import 'package:gym_mate/view/dashboard/home/widgets/Model.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../../../res/colors/app_colors.dart';
+import '../../../services/notifications_service.dart';
 import 'widgets/exercise_component.dart';
 import 'widgets/tb_component.dart';
 
@@ -15,6 +16,14 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
+  //Acess of notifiction servives for the android version of device
+  NotificationServices notificationServices = NotificationServices();
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    notificationServices.requestNotificationPermission();
+  }
+
   @override
   Widget build(BuildContext context) {
     // Create a list of training data for cardio
@@ -92,7 +101,7 @@ class _HomeViewState extends State<HomeView> {
           padding: const EdgeInsets.all(10.0),
           child: Column(
             children: [
-              SizedBox(height: Get.height * 0.032),
+              SizedBox(height: Get.height * 0.020),
               // Header Section
               Padding(
                 padding: const EdgeInsets.all(10.0),

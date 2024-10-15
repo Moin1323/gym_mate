@@ -28,7 +28,7 @@ class TabrComponent extends StatelessWidget {
               CircleAvatar(
                 backgroundColor:
                     Colors.white10, // Background color for the avatar
-                radius: 18, // Size of the CircleAvatar
+                radius: 15, // Size of the CircleAvatar
                 child: ClipOval(
                   child: Padding(
                     padding: const EdgeInsets.all(2.0),
