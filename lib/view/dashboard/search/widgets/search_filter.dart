@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gym_mate/res/colors/app_colors.dart';
-import 'package:gym_mate/view/search/search_filter/popular_searches.dart';
-import 'package:gym_mate/view/search/search_filter/search_textfeild.dart';
+import 'package:gym_mate/view/dashboard/search/widgets/popular_searches.dart';
+import 'package:gym_mate/view/dashboard/search/widgets/search_textfeild.dart';
 
 class SearchFilter extends StatefulWidget {
   const SearchFilter({super.key});

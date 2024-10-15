@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gym_mate/res/colors/app_colors.dart';
-import 'package:gym_mate/view/search/search_filter/search_view/search_container.dart';
+import 'package:gym_mate/view/dashboard/search/search_view/search_container.dart';
 
 import 'new_equipment_component.dart';
 import 'poadcast_controller.dart'; // Import the MyContainer widget
@@ -133,7 +133,7 @@ class _SearchViewState extends State<SearchView> {
                   )
                 ],
               ),
-              Container(
+              SizedBox(
                 height: Get.height * 0.3075,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,

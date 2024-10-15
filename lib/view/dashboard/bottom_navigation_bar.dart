@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:gym_mate/view/search/search_filter/search_view/search_view.dart';
+import 'package:gym_mate/view/dashboard/search/search_view/search_view.dart';
 import 'package:iconsax/iconsax.dart';
 
-import '../../settings/settings_view.dart';
-import '../home/home_view.dart';
+import 'settings/settings_view.dart';
+import 'home/home_view.dart';
 
-class Bnb extends StatefulWidget {
-  const Bnb({super.key});
+class BottomNavigationbar extends StatefulWidget {
+  const BottomNavigationbar({super.key});
 
   @override
-  State<Bnb> createState() => _BnbState();
+  State<BottomNavigationbar> createState() => _BottomNavigationbarState();
 }
 
 class HomeController extends GetxController {
@@ -22,7 +22,7 @@ class HomeController extends GetxController {
   }
 }
 
-class _BnbState extends State<Bnb> {
+class _BottomNavigationbarState extends State<BottomNavigationbar> {
   // Instantiate HomeController
   final HomeController homeController = Get.put(HomeController());
 

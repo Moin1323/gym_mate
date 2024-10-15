@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gym_mate/res/colors/app_colors.dart';
 
-import 'AccountTile.dart'; // Ensure this file exists in your project
+import 'widgets/AccountTile.dart'; // Ensure this file exists in your project
 
 class SettingsView extends StatefulWidget {
   const SettingsView({super.key});
@@ -73,57 +73,54 @@ class _SettingsViewState extends State<SettingsView> {
           ),
           Padding(
             padding: const EdgeInsets.only(top: 335.0, left: 10, right: 10),
-            child: Expanded(
-              child: SizedBox(
-                height:
-                    Get.height * 0.52, // Approximately 65% of the screen height
-                child: ListView(
-                  padding: EdgeInsets.zero,
-                  children: const [
-                    AccountTile(
-                      accountName: 'Edit Profile',
-                      leadingIcon: Icons.account_circle,
-                      trailingIcon: Icons.chevron_right,
-                    ),
-                    AccountTile(
-                      accountName: 'Password Change',
-                      leadingIcon: Icons.lock_clock,
-                      trailingIcon: Icons.chevron_right,
-                    ),
-                    AccountTile(
-                      accountName: 'Subscription',
-                      leadingIcon: Icons.subscriptions_rounded,
-                      trailingIcon: Icons.chevron_right,
-                    ),
-                    AccountTile(
-                      accountName: 'Saved Items',
-                      leadingIcon: Icons.favorite,
-                      trailingIcon: Icons.chevron_right,
-                    ),
-                    AccountTile(
-                      accountName: 'Notifications',
-                      leadingIcon: Icons.notifications,
-                      showSwitch:
-                          true, // Show CupertinoSwitch for Notifications
-                    ),
-                    AccountTile(
-                      accountName: 'Theme',
-                      leadingIcon: Icons.color_lens_outlined,
-                      showSwitch: true,
-                    ),
-                    AccountTile(
-                      accountName: 'Privary & Security',
-                      leadingIcon: Icons.privacy_tip,
-                      trailingIcon: Icons.chevron_right,
-                    ),
-                    AccountTile(
-                      accountName: 'Complains & Help',
-                      leadingIcon: Icons.help,
-                      trailingIcon: Icons.chevron_right,
-                    ),
-                    // Add more AccountTiles as needed
-                  ],
-                ),
+            child: SizedBox(
+              height:
+                  Get.height * 0.52, // Approximately 65% of the screen height
+              child: ListView(
+                padding: EdgeInsets.zero,
+                children: const [
+                  AccountTile(
+                    accountName: 'Edit Profile',
+                    leadingIcon: Icons.account_circle,
+                    trailingIcon: Icons.chevron_right,
+                  ),
+                  AccountTile(
+                    accountName: 'Password Change',
+                    leadingIcon: Icons.lock_clock,
+                    trailingIcon: Icons.chevron_right,
+                  ),
+                  AccountTile(
+                    accountName: 'Subscription',
+                    leadingIcon: Icons.subscriptions_rounded,
+                    trailingIcon: Icons.chevron_right,
+                  ),
+                  AccountTile(
+                    accountName: 'Saved Items',
+                    leadingIcon: Icons.favorite,
+                    trailingIcon: Icons.chevron_right,
+                  ),
+                  AccountTile(
+                    accountName: 'Notifications',
+                    leadingIcon: Icons.notifications,
+                    showSwitch: true, // Show CupertinoSwitch for Notifications
+                  ),
+                  AccountTile(
+                    accountName: 'Theme',
+                    leadingIcon: Icons.color_lens_outlined,
+                    showSwitch: true,
+                  ),
+                  AccountTile(
+                    accountName: 'Privary & Security',
+                    leadingIcon: Icons.privacy_tip,
+                    trailingIcon: Icons.chevron_right,
+                  ),
+                  AccountTile(
+                    accountName: 'Complains & Help',
+                    leadingIcon: Icons.help,
+                    trailingIcon: Icons.chevron_right,
+                  ),
+                  // Add more AccountTiles as needed
+                ],
               ),
             ),
           ),

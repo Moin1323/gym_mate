@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gym_mate/repository/login_repository/login_repository.dart';
-import 'package:gym_mate/view/dashboard/BottomNavigationBar/BnB.dart';
+import 'package:gym_mate/view/dashboard/bottom_navigation_bar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginViewModel extends GetxController {
@@ -39,7 +39,7 @@ class LoginViewModel extends GetxController {
         );
         await _saveLoginStatus(true);
         clearFields();
-        Get.offAll(() => const Bnb()); // Redirect to main view
+        Get.offAll(() => const BottomNavigationbar()); // Redirect to main view
       } on FirebaseAuthException catch (e) {
         Get.snackbar(
           'Login Error',
@@ -102,7 +102,7 @@ class LoginViewModel extends GetxController {
       bool isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
 
       if (isLoggedIn && getCurrentUser() != null) {
-        Get.offAll(() => const Bnb());
+        Get.offAll(() => const BottomNavigationbar());
       }
     } catch (e) {
       Get.snackbar(

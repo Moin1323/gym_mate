@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
-import '../../../res/colors/app_colors.dart';
+import '../../../../res/colors/app_colors.dart';
 
 // Define the SearchController here
 class SearchController extends GetxController {
@@ -40,10 +40,10 @@ class _SearchTextfeildState extends State<SearchTextfeild> {
         focusedBorder: OutlineInputBorder(
           borderRadius:
               BorderRadius.circular(27), // Rounded corners when focused
-          borderSide:
-              BorderSide(color: AppColors.primary), // Border color when focused
+          borderSide: const BorderSide(
+              color: AppColors.primary), // Border color when focused
         ),
-        prefixIcon: Icon(
+        prefixIcon: const Icon(
           Iconsax.search_normal_1,
           color: AppColors.secondary, // Place icon at the start
         ),

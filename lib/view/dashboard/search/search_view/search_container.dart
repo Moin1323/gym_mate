@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:gym_mate/view/search/search_filter/search_filter.dart';
+import 'package:gym_mate/view/dashboard/search/widgets/search_filter.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../../../../res/colors/app_colors.dart';
