@@ -32,4 +32,21 @@ class Exercise {
           instructions.map((instruction) => instruction.toJson()).toList(),
     };
   }
+
+  // Create an Exercise from JSON
+  factory Exercise.fromJson(Map<String, dynamic> json) {
+    List<Instruction> instructions = (json['instructions'] as List)
+        .map((instruction) => Instruction.fromJson(instruction))
+        .toList();
+
+    return Exercise(
+      name: json['name'],
+      category: json['category'],
+      muscleGroup: json['muscleGroup'],
+      equipment: json['equipment'],
+      animationUrl: json['animationUrl'],
+      difficulty: json['difficulty'],
+      instructions: instructions,
+    );
+  }
 }

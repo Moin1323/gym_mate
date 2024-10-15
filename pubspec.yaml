@@ -46,6 +46,7 @@ dependencies:
   iconsax: ^0.0.8
   firebase_database: ^11.1.4
   flutter_custom_clippers: ^2.1.0
+  cached_network_image: ^3.4.1
 
 dev_dependencies:
   flutter_test:
