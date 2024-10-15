@@ -4,8 +4,8 @@ import 'package:gym_mate/view/dashboard/home/widgets/Model.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../../../res/colors/app_colors.dart';
-import 'widgets/tb_component.dart';
 import 'widgets/exercise_component.dart';
+import 'widgets/tb_component.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -92,7 +92,7 @@ class _HomeViewState extends State<HomeView> {
           padding: const EdgeInsets.all(10.0),
           child: Column(
             children: [
-              SizedBox(height: Get.height * 0.02),
+              SizedBox(height: Get.height * 0.032),
               // Header Section
               Padding(
                 padding: const EdgeInsets.all(10.0),

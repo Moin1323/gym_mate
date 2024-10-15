@@ -20,7 +20,7 @@ class _SettingsViewState extends State<SettingsView> {
         children: [
           SizedBox(
             width: Get.width,
-            height: Get.height * 0.22,
+            height: Get.height * 0.23,
             child: Image.asset(
               'lib/assets/images/user_cover_img.jpg',
               fit: BoxFit.cover,

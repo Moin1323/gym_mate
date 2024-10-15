@@ -50,7 +50,7 @@ class _SearchViewState extends State<SearchView> {
           child: Column(
             children: [
               SizedBox(
-                height: Get.height * 0.025,
+                height: Get.height * 0.032,
               ),
               const Padding(
                 padding: EdgeInsets.all(5.0),
