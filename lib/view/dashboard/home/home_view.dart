@@ -34,7 +34,7 @@ class _HomeViewState extends State<HomeView> {
           padding: const EdgeInsets.all(10.0),
           child: Column(
             children: [
-              SizedBox(height: Get.height * 0.02),
+              SizedBox(height: Get.height * 0.020),
               // Header Section
               Padding(
                 padding: const EdgeInsets.all(10.0),
