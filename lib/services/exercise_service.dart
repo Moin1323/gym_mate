@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:gym_mate/repository/exercise_providers/boxing.dart';
-import 'package:gym_mate/repository/exercise_providers/cardio.dart';
-import 'package:gym_mate/repository/exercise_providers/gym.dart';
+import 'package:gym_mate/providers/exercise_providers/boxing.dart';
+import 'package:gym_mate/providers/exercise_providers/cardio.dart';
+import 'package:gym_mate/providers/exercise_providers/gym.dart';
 
 final fireStore = FirebaseFirestore.instance.collection("Workouts");
 

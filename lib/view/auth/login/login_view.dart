@@ -57,8 +57,8 @@ class _LoginViewState extends State<LoginView> {
                     const SizedBox(height: 30),
                     // Email TextField
                     CustomTextField(
-                      controller: loginVM.emailController.value,
-                      focusNode: loginVM.emailFocusNode.value,
+                      controller: loginVM.emailController,
+                      focusNode: loginVM.emailFocusNode,
                       labelText: 'Email',
                       hintText: 'Enter your Email',
                       validator: (value) {
@@ -70,8 +70,8 @@ class _LoginViewState extends State<LoginView> {
                       onFieldSubmitted: (value) {
                         Utils.fieldFocusChange(
                           context,
-                          loginVM.emailFocusNode.value,
-                          loginVM.passwordFocusNode.value,
+                          loginVM.emailFocusNode,
+                          loginVM.passwordFocusNode,
                         );
                       },
                       inputFormatters: const [],
@@ -79,8 +79,8 @@ class _LoginViewState extends State<LoginView> {
                     const SizedBox(height: 30),
                     // Password TextField
                     CustomTextField(
-                      controller: loginVM.passwordController.value,
-                      focusNode: loginVM.passwordFocusNode.value,
+                      controller: loginVM.passwordController,
+                      focusNode: loginVM.passwordFocusNode,
                       labelText: 'Password',
                       hintText: 'Enter your password',
                       obscureText: true,
@@ -147,7 +147,7 @@ class _LoginViewState extends State<LoginView> {
                             ),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
-                                Get.to(const SignupView());
+                                Get.to(() => const SignupView());
                               },
                           ),
                         ],
