@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:gym_mate/res/colors/app_colors.dart';
 
 class MyContainer extends StatefulWidget {
   final String imagePath;
@@ -38,7 +39,7 @@ class _MyContainerState extends State<MyContainer> {
               right: 15,
               child: CircleAvatar(
                   radius: 25,
-                  backgroundColor: Colors.white,
+                  backgroundColor: AppColors.secondary,
                   child: IconButton(
                       onPressed: () {},
                       icon: const Icon(
