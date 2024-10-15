@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:gym_mate/view/search/search_filter/search_view/search_view.dart';
 import 'package:iconsax/iconsax.dart';
 
+import '../../settings/settings_view.dart';
 import '../home/home_view.dart';
 
 class Bnb extends StatefulWidget {
@@ -29,7 +30,7 @@ class _BnbState extends State<Bnb> {
   final List<Widget> _screens = [
     const HomeView(),
     const SearchView(),
-    const SettingsView(), // Placeholder for the settings screen
+    const SettingsView()
   ];
 
   @override
@@ -68,18 +69,6 @@ class _BnbState extends State<Bnb> {
           type: BottomNavigationBarType.fixed,
         );
       }),
-    );
-  }
-}
-
-// Placeholder for SettingsView
-class SettingsView extends StatelessWidget {
-  const SettingsView({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Settings Screen'),
     );
   }
 }
