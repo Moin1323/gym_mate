@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gym_mate/res/colors/app_colors.dart';
-import 'package:gym_mate/view/services/splash_services.dart';
+import 'package:gym_mate/services/splash_services.dart';
 
 class SplashView extends StatefulWidget {
   const SplashView({super.key});
@@ -15,7 +15,7 @@ class _SplashViewState extends State<SplashView> {
   @override
   void initState() {
     super.initState();
-    splash.isLogin();
+    splash.isLogin(); // Perform login check immediately
   }
 
   @override
