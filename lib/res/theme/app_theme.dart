@@ -12,8 +12,7 @@ class AppThemes {
 
     // Setting systemOverlayStyle for the entire app
     appBarTheme: const AppBarTheme(
-      systemOverlayStyle:
-          SystemUiOverlayStyle.dark, // This will apply dark overlay globally
+      systemOverlayStyle: SystemUiOverlayStyle.dark,
     ),
 
     elevatedButtonTheme: ElevatedButtonThemeData(
@@ -51,4 +50,13 @@ class AppThemes {
       ),
     ),
   );
+
+  // Method to set System UI Overlay Style
+  static void setSystemUIOverlayStyle() {
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      statusBarIconBrightness:
+          Brightness.dark, // Dark icons for light background
+      statusBarColor: Colors.transparent, // Make the status bar transparent
+    ));
+  }
 }

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:gym_mate/view/dashboard/home/widgets/Model.dart';
+import 'package:gym_mate/repository/user_repository/user_repository.dart';
 import 'package:iconsax/iconsax.dart';
-
 import '../../../res/colors/app_colors.dart';
-import 'tb_component.dart';
+import 'widgets/tb_component.dart';
 import 'widgets/exercise_component.dart';
 
 class HomeView extends StatefulWidget {
@@ -15,75 +14,18 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
+  final UserController userController = Get.put(UserController());
+
+  @override
+  void initState() {
+    super.initState();
+    // Load user data and exercises here
+    userController.fetchUserData();
+    userController.fetchAllExercises();
+  }
+
   @override
   Widget build(BuildContext context) {
-    // Create a list of training data for cardio
-    final List<TrainingData> trainingListCardio = [
-      TrainingData(
-        imageUrl:
-            'lib/assets/images/CardioMain.jpg', // Replace with your actual image paths
-        trainingTitle: 'Cardio\nTraining',
-        taskCount: '27 Tasks',
-        rating: 4.7,
-      ),
-      TrainingData(
-        imageUrl: 'lib/assets/images/Cardio4.jpg',
-        trainingTitle: 'Cardio\nTraining',
-        taskCount: '18 Tasks',
-        rating: 4.8,
-      ),
-      TrainingData(
-        imageUrl: 'lib/assets/images/Cardio3.jpg',
-        trainingTitle: 'Cardio\nTraining',
-        taskCount: '22 Tasks',
-        rating: 4.5,
-      ),
-    ];
-
-    // Create a list of training data for gym
-    final List<TrainingData> trainingListGym = [
-      TrainingData(
-        imageUrl: 'lib/assets/images/CardioMain.jpg', // Original image path
-        trainingTitle: 'Strength\n Training',
-        taskCount: '30 Tasks',
-        rating: 4.9,
-      ),
-      TrainingData(
-        imageUrl: 'lib/assets/images/CardioMain.jpg', // Original image path
-        trainingTitle: 'Full Body\n Workout',
-        taskCount: '25 Tasks',
-        rating: 4.8,
-      ),
-      TrainingData(
-        imageUrl: 'lib/assets/images/CardioMain.jpg', // Original image path
-        trainingTitle: 'Weightlifting\n Basics',
-        taskCount: '20 Tasks',
-        rating: 4.6,
-      ),
-    ];
-
-    // Create a list of training data for boxing
-    final List<TrainingData> trainingListBoxing = [
-      TrainingData(
-        imageUrl: 'lib/assets/images/CardioMain.jpg', // Original image path
-        trainingTitle: 'Boxing \nFundamentals',
-        taskCount: '15 Tasks',
-        rating: 4.7,
-      ),
-      TrainingData(
-        imageUrl: 'lib/assets/images/CardioMain.jpg', // Original image path
-        trainingTitle: 'Advanced \nBoxing Techniques',
-        taskCount: '10 Tasks',
-        rating: 4.8,
-      ),
-      TrainingData(
-        imageUrl: 'lib/assets/images/CardioMain.jpg', // Original image path
-        trainingTitle: 'Conditioning \nfor Boxers',
-        taskCount: '12 Tasks',
-        rating: 4.5,
-      ),
-    ];
-
     return DefaultTabController(
       length: 3, // Number of tabs
       child: Scaffold(
@@ -92,38 +34,44 @@ class _HomeViewState extends State<HomeView> {
           padding: const EdgeInsets.all(10.0),
           child: Column(
             children: [
-              SizedBox(height: Get.height * 0.02),
+              SizedBox(height: Get.height * 0.020),
               // Header Section
               Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Row(
                   children: [
-                    const Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Hello, Ramin 💪🏻',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w400,
-                            color: Colors.grey,
-                          ),
-                        ),
-                        Text(
-                          'This Is Behealth',
-                          style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ],
-                    ),
+                    Obx(() {
+                      if (userController.isLoading.value) {
+                        return const Center(child: CircularProgressIndicator());
+                      } else {
+                        String userName =
+                            userController.user.value.name ?? 'User';
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Hello, $userName 💪🏻',
+                              style: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w400,
+                                color: Colors.grey,
+                              ),
+                            ),
+                            const Text(
+                              'This Is Gym Mate',
+                              style: TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        );
+                      }
+                    }),
                     const Spacer(),
                     GestureDetector(
-                      onTap: () {
-                        print('Notification icon pressed');
-                      },
+                      onTap: () {},
                       child: const CircleAvatar(
                         radius: 25,
                         backgroundColor: Colors.white24,
@@ -153,8 +101,7 @@ class _HomeViewState extends State<HomeView> {
                 labelPadding: EdgeInsets.symmetric(horizontal: 5),
                 indicatorPadding: EdgeInsets.symmetric(horizontal: 20),
                 dividerColor: Colors.transparent,
-                indicatorColor:
-                    AppColors.primary, // Customize the indicator color
+                indicatorColor: AppColors.primary,
                 tabs: [
                   // First Tab with Image and Text
                   TabrComponent(
@@ -174,28 +121,29 @@ class _HomeViewState extends State<HomeView> {
                 ],
               ),
               Expanded(
-                child: TabBarView(
-                  children: [
-                    // Cardio
-                    PopularTrainings(
-                        trainings:
-                            trainingListCardio), // Pass the list to the widget
-                    // Gym
-                    SizedBox(
-                      child: PopularTrainings(
-                        trainings:
-                            trainingListGym, // Pass the same or a different list
-                      ),
-                    ),
-                    // Boxing
-                    SizedBox(
-                      child: PopularTrainings(
-                        trainings:
-                            trainingListBoxing, // Pass the same or a different list
-                      ),
-                    ),
-                  ],
-                ),
+                child: Obx(() {
+                  // Check if exercises are loaded
+                  if (userController.isLoading.value) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else {
+                    return TabBarView(
+                      children: [
+                        PopularTrainings(
+                          trainings: userController.exercises['cardio'] ?? [],
+                          isLoading: userController.isLoading.value,
+                        ),
+                        PopularTrainings(
+                          trainings: userController.exercises['gym'] ?? [],
+                          isLoading: userController.isLoading.value,
+                        ),
+                        PopularTrainings(
+                          trainings: userController.exercises['boxing'] ?? [],
+                          isLoading: userController.isLoading.value,
+                        ),
+                      ],
+                    );
+                  }
+                }),
               ),
               Column(
                 children: [
@@ -223,9 +171,9 @@ class _HomeViewState extends State<HomeView> {
                 height: Get.height * 0.1,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
-                  color: Color(0xFF191919),
+                  color: const Color(0xFF191919),
                 ),
-              )
+              ),
             ],
           ),
         ),
