@@ -6,29 +6,30 @@ import 'package:gym_mate/view/dashboard/Exercieses/excersice_datail.dart'; // Im
 
 class MainExercisesView extends StatelessWidget {
   final List<Exercise> exercises; // Parameter to accept exercises
-final String title;
-  const MainExercisesView({super.key, required this.exercises, required this.title}); // Constructor
+  final String title;
+  const MainExercisesView(
+      {super.key, required this.exercises, required this.title}); // Constructor
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-         
-        title:  Text( // App bar title for the exercise list
+        title: Text(
+          // App bar title for the exercise list
           title,
-          style: TextStyle(fontSize: 28, fontWeight: FontWeight.w600,color: Colors.white),
-          
+          style: const TextStyle(
+              fontSize: 28, fontWeight: FontWeight.w600, color: Colors.white),
         ),
         backgroundColor: AppColors.background,
-        iconTheme: IconThemeData(color: Colors.white,size: 28),
+        iconTheme: const IconThemeData(color: Colors.white, size: 28),
       ),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: exercises.isEmpty // Check if exercises are empty
-            ? Center(
+            ? const Center(
                 child: Text(
                   'No exercises available',
-                  style: const TextStyle(color: Colors.white, fontSize: 20),
+                  style: TextStyle(color: Colors.white, fontSize: 20),
                 ),
               )
             : ListView.builder(
@@ -36,15 +37,19 @@ final String title;
                 itemBuilder: (context, index) {
                   final exercise = exercises[index];
                   return Container(
-                    margin: const EdgeInsets.only(bottom: 20), // Add margin between containers
+                    margin: const EdgeInsets.only(
+                        bottom: 20), // Add margin between containers
                     height: 250, // Set the height of the container
                     decoration: BoxDecoration(
-                      color: Colors.grey.withOpacity(0.1),
+                      color: Colors.grey.withOpacity(0.01),
                       borderRadius: BorderRadius.circular(10),
-                      border: Border.all(color: AppColors.primary.withOpacity(0.5)),
+                      border:
+                          Border.all(color: AppColors.primary.withOpacity(0.5)),
                       image: DecorationImage(
-                        image: NetworkImage(exercise.animationUrl), // Use exercise's image
-                        fit: BoxFit.cover, // Cover the entire container with the image
+                        image: NetworkImage(
+                            exercise.animationUrl), // Use exercise's image
+                        fit: BoxFit
+                            .cover, // Cover the entire container with the image
                         colorFilter: ColorFilter.mode(
                           Colors.grey.withOpacity(0.3),
                           BlendMode.dstATop,
@@ -107,7 +112,8 @@ final String title;
                                     child: TextButton(
                                       onPressed: () {
                                         // Navigate to details screen when "TRY" button is pressed
-                                        Get.to(() => ExerciseDetail(exercise: exercise));
+                                        Get.to(() =>
+                                            ExerciseDetail(exercise: exercise));
                                       },
                                       child: const Text(
                                         "TRY",

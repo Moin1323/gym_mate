@@ -9,12 +9,6 @@ class AppThemes {
     scaffoldBackgroundColor: AppColors.background,
     brightness: Brightness.light,
     fontFamily: 'Satoshi',
-
-    // Setting systemOverlayStyle for the entire app
-    appBarTheme: const AppBarTheme(
-      systemOverlayStyle: SystemUiOverlayStyle.dark,
-    ),
-
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 15),
@@ -28,7 +22,6 @@ class AppThemes {
         ),
       ),
     ),
-
     inputDecorationTheme: InputDecorationTheme(
       fillColor: Colors.grey.withOpacity(0.3),
       filled: true,
