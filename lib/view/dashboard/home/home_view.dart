@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:gym_mate/repository/user_repository/user_repository.dart';
 
@@ -27,6 +28,10 @@ class _HomeViewState extends State<HomeView> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      statusBarIconBrightness: Brightness.light,
+      statusBarColor: AppColors.background,
+    ));
     return DefaultTabController(
       length: 3, // Number of tabs
       child: Scaffold(
@@ -143,7 +148,6 @@ class _HomeViewState extends State<HomeView> {
                           trainings: userController.exercises['boxing'] ?? [],
                           isLoading: userController.isLoading.value,
                           title: "Boxing",
-
                         ),
                       ],
                     );
@@ -161,10 +165,7 @@ class _HomeViewState extends State<HomeView> {
                       ),
                       const Spacer(),
                       TextButton(
-                        onPressed: () {
-
-                          
-                        },
+                        onPressed: () {},
                         child: const Text(
                           'See all',
                           style: TextStyle(

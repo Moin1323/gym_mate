@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gym_mate/models/exercise/exercise.dart';
-import 'package:gym_mate/res/assets/image_assets.dart';
 import 'package:gym_mate/res/colors/app_colors.dart';
 import 'package:gym_mate/res/components/custom_primary_button.dart';
 
@@ -35,13 +34,15 @@ class ExerciseDetail extends StatelessWidget {
           children: [
             Container(
               decoration: BoxDecoration(
+                color: AppColors.primary,
                 border: Border.all(color: Colors.black, width: 2),
                 borderRadius: BorderRadius.circular(16),
               ),
               clipBehavior: Clip.antiAlias,
               child: Image.network(
                 exercise.animationUrl,
-                height: 250,
+                fit: BoxFit.cover,
+                height: 200,
                 width: double.infinity,
                 loadingBuilder: (context, child, loadingProgress) {
                   if (loadingProgress == null) return child;
@@ -64,12 +65,13 @@ class ExerciseDetail extends StatelessWidget {
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
-                
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   _infoCard(Icons.category, "Category: ${exercise.category}"),
-                  _infoCard(Icons.emoji_flags, "Difficulty: ${exercise.difficulty}"),
-                  _infoCard(Icons.sports_gymnastics, "Equipment: ${exercise.equipment}"),
+                  _infoCard(
+                      Icons.emoji_flags, "Difficulty: ${exercise.difficulty}"),
+                  _infoCard(Icons.sports_gymnastics,
+                      "Equipment: ${exercise.equipment}"),
                 ],
               ),
             ),
@@ -78,12 +80,12 @@ class ExerciseDetail extends StatelessWidget {
               child: ListView.builder(
                 itemCount: exercise.instructions.length,
                 itemBuilder: (context, index) {
-                  int val=index+1;
+                  int val = index + 1;
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Card(
                       elevation: 10,
-                      borderOnForeground:true ,
+                      borderOnForeground: true,
                       color: Colors.grey.withOpacity(.1),
                       child: Container(
                         padding: const EdgeInsets.all(5),
@@ -92,13 +94,21 @@ class ExerciseDetail extends StatelessWidget {
                           leading: Container(
                             height: 30,
                             width: 30,
-                            decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.circular(5)),
-                            
-                            child: Center(child: Text(val.toString(),style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),)),),
-                          
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(5)),
+                            child: Center(
+                                child: Text(
+                              val.toString(),
+                              style: const TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold),
+                            )),
+                          ),
+
                           title: Text(
                             exercise.instructions[index].details,
-                            style: const TextStyle(color: Colors.white, fontSize: 14),
+                            style: const TextStyle(
+                                color: Colors.white, fontSize: 14),
                           ),
                         ),
                       ),
@@ -124,7 +134,7 @@ class ExerciseDetail extends StatelessWidget {
 
   Widget _infoCard(IconData icon, String text) {
     return Container(
-      margin: EdgeInsets.all(4),
+      margin: const EdgeInsets.all(4),
       decoration: BoxDecoration(
         color: AppColors.background,
         borderRadius: BorderRadius.circular(10),
