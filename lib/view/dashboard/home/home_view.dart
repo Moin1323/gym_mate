@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gym_mate/repository/user_repository/user_repository.dart';
+
 import 'package:iconsax/iconsax.dart';
 import '../../../res/colors/app_colors.dart';
 import 'widgets/tb_component.dart';
@@ -131,14 +132,18 @@ class _HomeViewState extends State<HomeView> {
                         PopularTrainings(
                           trainings: userController.exercises['cardio'] ?? [],
                           isLoading: userController.isLoading.value,
+                          title: 'Cardio',
                         ),
                         PopularTrainings(
                           trainings: userController.exercises['gym'] ?? [],
                           isLoading: userController.isLoading.value,
+                          title: "Gym",
                         ),
                         PopularTrainings(
                           trainings: userController.exercises['boxing'] ?? [],
                           isLoading: userController.isLoading.value,
+                          title: "Boxing",
+
                         ),
                       ],
                     );
@@ -156,7 +161,10 @@ class _HomeViewState extends State<HomeView> {
                       ),
                       const Spacer(),
                       TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+
+                          
+                        },
                         child: const Text(
                           'See all',
                           style: TextStyle(

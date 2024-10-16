@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gym_mate/models/exercise/exercise.dart';
+import 'package:gym_mate/repository/user_repository/user_repository.dart';
+import 'package:gym_mate/view/dashboard/Exercieses/excersice_datail.dart';
+import 'package:gym_mate/view/dashboard/Exercieses/main_exercises_view.dart';
 
 class PopularTrainings extends StatelessWidget {
+  final UserController userController = Get.put(UserController());
   final List<Exercise> trainings;
-  final bool isLoading; // Add a loading state
+  final String title;
+  final bool isLoading;
 
-  // Constructor to accept a list of training data and loading state
-  const PopularTrainings({
+   PopularTrainings({
     super.key,
     required this.trainings,
-    required this.isLoading, // Initialize loading state
+    required this.isLoading, required this.title,
   });
 
   @override
@@ -27,7 +31,10 @@ class PopularTrainings extends StatelessWidget {
             ),
             const Spacer(),
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                Get.to(() => MainExercisesView(title: title ,exercises: trainings));
+
+              },
               child: const Text(
                 'See all',
                 style:
@@ -37,7 +44,6 @@ class PopularTrainings extends StatelessWidget {
           ],
         ),
         SizedBox(height: Get.height * 0.005),
-        // Show loading indicator or the list of trainings
         isLoading
             ? const Center(
                 child: CircularProgressIndicator(
@@ -60,8 +66,13 @@ class PopularTrainings extends StatelessWidget {
   }
 
   // Helper method to build individual training cards
-  Widget _buildTrainingCard(Exercise training) {
-    return Stack(
+Widget _buildTrainingCard(Exercise training) {
+  return GestureDetector(
+    onTap: () {
+      // Navigate to ExerciseDetail screen
+      Get.to(() => ExerciseDetail(exercise: training));
+    },
+    child: Stack(
       children: [
         ClipRRect(
           borderRadius: BorderRadius.circular(18),
@@ -118,6 +129,8 @@ class PopularTrainings extends StatelessWidget {
           ),
         ),
       ],
-    );
-  }
+    ),
+  );
+}
+
 }
