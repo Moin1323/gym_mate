@@ -1,10 +1,14 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gym_mate/repository/user_repository/user_repository.dart';
 import 'package:iconsax/iconsax.dart';
+
 import '../../../res/colors/app_colors.dart';
-import 'widgets/tb_component.dart';
+import '../../../services/notifications_service.dart';
+import '../../Notifications/notifications_view.dart';
 import 'widgets/exercise_component.dart';
+import 'widgets/tb_component.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -15,13 +19,20 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   final UserController userController = Get.put(UserController());
+  NotificationServices notificationServices = NotificationServices();
 
   @override
   void initState() {
     super.initState();
-    // Load user data and exercises here
     userController.fetchUserData();
     userController.fetchAllExercises();
+    notificationServices.requestNotificationPermission();
+    notificationServices.initLocalNotifications(
+        context, RemoteMessage()); // Initialize local notifications
+    notificationServices.firebaseInit();
+    notificationServices.getDeviceToken().then((value) {
+      print('Device token: $value');
+    });
   }
 
   @override
@@ -71,7 +82,9 @@ class _HomeViewState extends State<HomeView> {
                     }),
                     const Spacer(),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Get.to(notifications_view());
+                      },
                       child: const CircleAvatar(
                         radius: 25,
                         backgroundColor: Colors.white24,
