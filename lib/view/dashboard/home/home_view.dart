@@ -1,7 +1,9 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:gym_mate/repository/user_repository/user_repository.dart';
+
 import 'package:iconsax/iconsax.dart';
 
 import '../../../res/colors/app_colors.dart';
@@ -37,6 +39,10 @@ class _HomeViewState extends State<HomeView> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      statusBarIconBrightness: Brightness.light,
+      statusBarColor: AppColors.background,
+    ));
     return DefaultTabController(
       length: 3, // Number of tabs
       child: Scaffold(
@@ -144,14 +150,17 @@ class _HomeViewState extends State<HomeView> {
                         PopularTrainings(
                           trainings: userController.exercises['cardio'] ?? [],
                           isLoading: userController.isLoading.value,
+                          title: 'Cardio',
                         ),
                         PopularTrainings(
                           trainings: userController.exercises['gym'] ?? [],
                           isLoading: userController.isLoading.value,
+                          title: "Gym",
                         ),
                         PopularTrainings(
                           trainings: userController.exercises['boxing'] ?? [],
                           isLoading: userController.isLoading.value,
+                          title: "Boxing",
                         ),
                       ],
                     );

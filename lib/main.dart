@@ -10,7 +10,6 @@ import 'package:gym_mate/view/dashboard/bottom_navigation_bar.dart';
 import 'firebase_options.dart';
 
 void main() async {
-  AppThemes.setSystemUIOverlayStyle();
   WidgetsFlutterBinding.ensureInitialized();
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   await Firebase.initializeApp(

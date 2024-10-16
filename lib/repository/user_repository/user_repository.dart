@@ -4,13 +4,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:gym_mate/models/exercise/exercise.dart';
 import 'package:gym_mate/models/login/user_model.dart';
 import 'package:gym_mate/view/auth/login/login_view.dart';
+import 'package:gym_mate/view/dashboard/Exercieses/excersice_datail.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserController extends GetxController {
   var user = UserModel().obs;
-  var exercises =
-      <String, List<Exercise>>{}.obs; // For storing categorized exercises
+  var exercises = <String, List<Exercise>>{}.obs; // For storing categorized exercises
   var isLoading = true.obs;
+  var singleExercise = Exercise(name: "", instructions: [], category: '', muscleGroup: '', equipment: '', animationUrl: '', difficulty: '').obs; // For storing a single exercise
 
   @override
   void onInit() {
@@ -115,5 +116,34 @@ class UserController extends GetxController {
     } finally {
       isLoading.value = false; // Stop loading
     }
+  }
+
+  Future<void> fetchSingleExercise(String name) async {
+    isLoading.value = true; // Start loading
+    try {
+      DocumentSnapshot snapshot = await FirebaseFirestore.instance
+          .collection('Workouts')
+          .doc('gym') // Assuming you want to fetch from the 'gym' category
+          .collection('exercises')
+          .doc(name) // Use the specific exercise ID here
+          .get();
+
+      if (snapshot.exists) {
+        singleExercise.value = Exercise.fromJson(snapshot.data() as Map<String, dynamic>);
+        print("Fetched single exercise: ${singleExercise.value.name}");
+      } else {
+        print("No exercise found for ID: $name");
+      }
+    } catch (e) {
+      print("Error fetching single exercise: $e");
+    } finally {
+      isLoading.value = false; // Stop loading
+    }
+  }
+
+  Future<void> selectExercise(String name) async {
+    await fetchSingleExercise(name); // Fetch the exercise details
+    
+    Get.to(() => ExerciseDetail(exercise: singleExercise.value));
   }
 }

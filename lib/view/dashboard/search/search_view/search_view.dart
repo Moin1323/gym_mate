@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:gym_mate/res/colors/app_colors.dart';
 import 'package:gym_mate/view/dashboard/search/search_view/search_container.dart';
@@ -42,6 +43,10 @@ class _SearchViewState extends State<SearchView> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      statusBarIconBrightness: Brightness.light,
+      statusBarColor: AppColors.background,
+    ));
     return Scaffold(
       backgroundColor: AppColors.background, // Set background color
       body: Padding(
@@ -50,22 +55,12 @@ class _SearchViewState extends State<SearchView> {
           child: Column(
             children: [
               SizedBox(
-                height: Get.height * 0.032,
+                height: Get.height * 0.06,
               ),
               const Padding(
                 padding: EdgeInsets.all(5.0),
                 child: Row(
                   children: [
-                    // Circular Avatar
-                    // CircleAvatar(
-                    //   radius: 25,
-                    //   backgroundColor: Colors.red,
-                    //   child: Image(
-                    //     image: AssetImage('lib/assets/images/user_img.png'),
-                    //     fit: BoxFit.cover,
-                    //   ),
-                    // ),
-                    // use in future if needed ...................
                     Search_Conatiner(),
                   ],
                 ),
