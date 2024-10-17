@@ -5,23 +5,26 @@ import 'package:gym_mate/view_models/controller/forgetPassword/forget_password_m
  // Adjust the path according to your project structure
 
 class ForgotPasswordView extends StatelessWidget {
-  final forgotPasswordController = Get.put(ForgotPasswordModel());
+  final ResetPasswordController reset=  Get.put(ResetPasswordController());
 
   ForgotPasswordView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Forgot Password"),
-        backgroundColor: AppColors.primary,
+      appBar: AppBar(leading: IconButton(onPressed: (){
+
+        Get.back();
+      }, icon: Icon(Icons.arrow_back,color: Colors.white,)),
+      
+      backgroundColor: Colors.black,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const SizedBox(height: 50),
+            const SizedBox(height: 150),
             const Text(
               'Forgot Password',
               style: TextStyle(
@@ -44,15 +47,17 @@ class ForgotPasswordView extends StatelessWidget {
 
             // Email Input Field
             TextField(
-              controller: forgotPasswordController.emailController,
-              focusNode: forgotPasswordController.emailFocus,
+              controller: reset.emailController,
+              style: const TextStyle(color: Colors.white),
+            
               decoration: InputDecoration(
+                
                 labelText: 'Email',
                 hintText: 'Enter your registered email',
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
-                prefixIcon: const Icon(Icons.email),
+                prefixIcon: const Icon(Icons.email,color: Colors.white,),
               ),
               keyboardType: TextInputType.emailAddress,
             ),
@@ -61,7 +66,8 @@ class ForgotPasswordView extends StatelessWidget {
             // Send Reset Email Button
             ElevatedButton(
               onPressed: () {
-                forgotPasswordController.sendPasswordResetEmail();
+                reset.resetPassword();
+                
               },
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 15),
@@ -71,13 +77,14 @@ class ForgotPasswordView extends StatelessWidget {
                 backgroundColor: AppColors.primary,
               ),
               child: Obx(() {
-                return forgotPasswordController.loading.value
+                return reset.isLoading.value
                     ? const CircularProgressIndicator(color: Colors.white)
                     : const Text(
                         'Send Reset Email',
                         style: TextStyle(
                           fontSize: 18,
-                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.background,
                         ),
                       );
               }),
