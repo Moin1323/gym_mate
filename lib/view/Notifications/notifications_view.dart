@@ -55,14 +55,14 @@ class _notifications_viewState extends State<notifications_view> {
                     borderRadius: BorderRadius.circular(20),
                     color: Colors.white38,
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(5.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(5.0),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment
                           .start, // Aligns the content to the start
                       children: [
                         Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: EdgeInsets.all(8.0),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment
                                 .start, // Aligns the text to the start
