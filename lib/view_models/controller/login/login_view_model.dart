@@ -2,7 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gym_mate/repository/login_repository/login_repository.dart';
+import 'package:gym_mate/view/auth/login/login_view.dart';
 import 'package:gym_mate/view/dashboard/bottom_navigation_bar.dart';
+import 'package:gym_mate/view_models/controller/home_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginViewModel extends GetxController {
@@ -39,6 +41,10 @@ class LoginViewModel extends GetxController {
         );
         await _saveLoginStatus(true);
         clearFields();
+        
+        // Reset currentIndex to 0 (Home view)
+        Get.find<HomeController>().changeIndex(0);
+        
         Get.offAll(() => const BottomNavigationbar()); // Redirect to main view
       } on FirebaseAuthException catch (e) {
         Get.snackbar(
@@ -102,12 +108,37 @@ class LoginViewModel extends GetxController {
       bool isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
 
       if (isLoggedIn && getCurrentUser() != null) {
+        // Reset the current index to Home
+        Get.find<HomeController>().currentIndex.value = 0; // This ensures that Home is shown first
         Get.offAll(() => const BottomNavigationbar());
       }
     } catch (e) {
       Get.snackbar(
         'Error',
         'Failed to check login status',
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
+    }
+  }
+
+  Future<void> logout() async {
+    try {
+      // Sign out from Firebase
+      await FirebaseAuth.instance.signOut();
+
+      // Clear shared preferences or any other persistent data
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.clear(); // This clears all saved data like login status
+
+      print("Done logout");
+      
+      // Navigate to the login screen
+      Get.offAllNamed('/login_view'); // Make sure this matches your route name
+    } catch (e) {
+      Get.snackbar(
+        'Logout Error',
+        'Failed to log out. Please try again later.',
         backgroundColor: Colors.red,
         colorText: Colors.white,
       );
