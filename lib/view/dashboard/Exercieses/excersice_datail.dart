@@ -33,6 +33,7 @@ class ExerciseDetail extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
+              height: 200,
               decoration: BoxDecoration(
                 color: AppColors.primary,
                 border: Border.all(color: Colors.black, width: 2),
