@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:gym_mate/res/getx_localization/languages.dart';
 import 'package:gym_mate/res/routes/app_routes.dart';
 import 'package:gym_mate/res/theme/app_theme.dart';
-import 'package:gym_mate/view/dashboard/bottom_navigation_bar.dart';
+import 'package:gym_mate/view/splash/splash_view.dart';
 
 import 'firebase_options.dart';
 
@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
       fallbackLocale: const Locale('en', 'US'),
       debugShowCheckedModeBanner: false,
       theme: AppThemes.myTheme,
-      home: const BottomNavigationbar(),
+      home: const SplashView(),
       getPages: AppRoutes.appRoutes(),
     );
   }
