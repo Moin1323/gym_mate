@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:gym_mate/res/assets/image_assets.dart';
 import 'package:gym_mate/res/colors/app_colors.dart';
 import 'package:gym_mate/utils/utils.dart';
+import 'package:gym_mate/view/auth/forgetPassword/forget_password_view.dart';
 import 'package:gym_mate/view/auth/signup/signup_view.dart';
 import 'package:gym_mate/view_models/controller/login/login_view_model.dart';
 import 'package:gym_mate/res/components/custom_text_field.dart';
@@ -94,14 +95,21 @@ class _LoginViewState extends State<LoginView> {
                     ),
                     const SizedBox(height: 10),
                     // Forgot Password
-                    const Align(
-                      alignment: Alignment.centerRight,
-                      child: Text(
-                        "Forgot your password?",
-                        style:
-                            TextStyle(color: AppColors.secondary, fontSize: 16),
-                      ),
-                    ),
+                   TextButton(
+  onPressed: () {
+    Get.to(() => ForgotPasswordView()); // Navigate to ForgotPasswordView
+  },
+  child: const Align(
+    alignment: Alignment.centerRight,
+    child: Text(
+      "Forgot your password?",
+      style: TextStyle(
+        color: AppColors.secondary,
+        fontSize: 16,
+      ),
+    ),
+  ),
+),
                     const SizedBox(height: 60),
                     // Login Button
                     ElevatedButton(

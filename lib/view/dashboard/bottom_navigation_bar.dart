@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gym_mate/view/dashboard/search/search_view/search_view.dart';
+import 'package:gym_mate/view_models/controller/home_controller.dart';
 import 'package:iconsax/iconsax.dart';
 
 import 'settings/settings_view.dart';
@@ -11,15 +12,6 @@ class BottomNavigationbar extends StatefulWidget {
 
   @override
   State<BottomNavigationbar> createState() => _BottomNavigationbarState();
-}
-
-class HomeController extends GetxController {
-  var currentIndex = 0.obs; // Observable variable for current index
-
-  // Method to change the index
-  void changeIndex(int index) {
-    currentIndex.value = index;
-  }
 }
 
 class _BottomNavigationbarState extends State<BottomNavigationbar> {
@@ -37,8 +29,7 @@ class _BottomNavigationbarState extends State<BottomNavigationbar> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Obx(() {
-        return _screens[
-            homeController.currentIndex.value]; // Display the selected screen
+        return _screens[homeController.currentIndex.value]; // Display the selected screen
       }),
       bottomNavigationBar: Obx(() {
         return BottomNavigationBar(
@@ -56,13 +47,10 @@ class _BottomNavigationbarState extends State<BottomNavigationbar> {
               label: '',
             ),
           ],
-          currentIndex: homeController
-              .currentIndex.value, // Current index from HomeController
-          selectedItemColor:
-              const Color(0xFFA3EC3E), // Color for the selected item
+          currentIndex: homeController.currentIndex.value, // Current index from HomeController
+          selectedItemColor: const Color(0xFFA3EC3E), // Color for the selected item
           unselectedItemColor: Colors.white, // Color for unselected items
-          backgroundColor: const Color(
-              0xFF000000), // Background color of the Bottom Navigation Bar
+          backgroundColor: const Color(0xFF000000), // Background color of the Bottom Navigation Bar
           onTap: (index) {
             homeController.changeIndex(index); // Change index when tapped
           },

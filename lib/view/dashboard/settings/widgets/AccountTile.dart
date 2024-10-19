@@ -9,6 +9,7 @@ class AccountTile extends StatelessWidget {
   final IconData? trailingIcon;
   final bool showSwitch; // Determines whether to show a switch or an icon
   final Widget? destinationScreen; // Optional destination screen
+  final VoidCallback? onPressed;
 
   const AccountTile({
     Key? key,
@@ -17,6 +18,7 @@ class AccountTile extends StatelessWidget {
     this.trailingIcon,
     this.showSwitch = false,
     this.destinationScreen,
+    this.onPressed,
   }) : super(key: key);
 
   @override
@@ -27,22 +29,24 @@ class AccountTile extends StatelessWidget {
       ),
       child: Container(
         decoration: BoxDecoration(
-          color:
-              AppColors.background, // Background color of the parent container
+          color: AppColors.background, // Background color of the parent container
           borderRadius: BorderRadius.circular(20),
         ),
         child: ListTile(
           onTap: () {
-            if (destinationScreen != null) {
-              // Navigate only if destinationScreen is not null
+            if (onPressed != null) {
+              // Call onPressed if provided
+              onPressed!();
+            } else if (destinationScreen != null) {
+              // Navigate only if destinationScreen is not null and onPressed is not provided
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => destinationScreen!),
               );
             } else {
-              // Optionally show a message if there's no destination
+              // Optionally show a message if there's no destination or onPressed
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('No destination specified.')),
+                const SnackBar(content: Text('No action specified.')),
               );
             }
           },
@@ -79,18 +83,16 @@ class AccountTile extends StatelessWidget {
                 // Show CupertinoSwitch if showSwitch is true, otherwise show the Icon
                 if (showSwitch)
                   Transform.scale(
-                    scale:
-                        0.8, // Adjust this value to increase or decrease the size
+                    scale: 0.8, // Adjust this value to increase or decrease the size
                     child: CupertinoSwitch(
                       value: true,
-                      activeColor: AppColors
-                          .primary, // Set the initial value of the switch as needed
+                      activeColor: AppColors.primary,
                       onChanged: (bool value) {
                         // Add your onChanged functionality here
                       },
                     ),
                   )
-                else
+                else if (trailingIcon != null)
                   Icon(
                     trailingIcon,
                     size: 25,
