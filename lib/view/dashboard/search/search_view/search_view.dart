@@ -58,7 +58,7 @@ class _SearchViewState extends State<SearchView> {
                 ],
               ),
               SizedBox(height: Get.height * 0.015),
-              VideoLoader(), // Video in the container
+              const VideoLoader(), // Video in the container
               SizedBox(
                 height: Get.height *
                     0.022, // 10 is approximately 1.25% of 800px height

@@ -9,9 +9,18 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class UserController extends GetxController {
   var user = UserModel().obs;
-  var exercises = <String, List<Exercise>>{}.obs; // For storing categorized exercises
+  var exercises =
+      <String, List<Exercise>>{}.obs; // For storing categorized exercises
   var isLoading = true.obs;
-  var singleExercise = Exercise(name: "", instructions: [], category: '', muscleGroup: '', equipment: '', animationUrl: '', difficulty: '').obs; // For storing a single exercise
+  var singleExercise = Exercise(
+          name: "",
+          instructions: [],
+          category: '',
+          muscleGroup: '',
+          equipment: '',
+          animationUrl: '',
+          difficulty: '')
+      .obs; // For storing a single exercise
 
   @override
   void onInit() {
@@ -129,7 +138,8 @@ class UserController extends GetxController {
           .get();
 
       if (snapshot.exists) {
-        singleExercise.value = Exercise.fromJson(snapshot.data() as Map<String, dynamic>);
+        singleExercise.value =
+            Exercise.fromJson(snapshot.data() as Map<String, dynamic>);
         print("Fetched single exercise: ${singleExercise.value.name}");
       } else {
         print("No exercise found for ID: $name");
@@ -143,7 +153,7 @@ class UserController extends GetxController {
 
   Future<void> selectExercise(String name) async {
     await fetchSingleExercise(name); // Fetch the exercise details
-    
+
     Get.to(() => ExerciseDetail(exercise: singleExercise.value));
   }
 }
