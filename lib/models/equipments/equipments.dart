@@ -10,7 +10,7 @@ class Equipment {
     required this.description,
     required this.category,
     required this.imageUrl,
-    this.availableSizes,
+    this.availableSizes, // Initialize this field optionally
   });
 
   // From JSON
