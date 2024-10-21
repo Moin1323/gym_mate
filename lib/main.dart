@@ -19,17 +19,19 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  // Initialize the ThemeController
   Get.put(ThemeController());
 
   final ThemeController themeController = Get.put(ThemeController());
   // Set initial system UI overlay style
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    statusBarIconBrightness: themeController.themeMode.value == ThemeMode.light
-        ? Brightness.dark
-        : Brightness.light,
-    statusBarColor: AppColors.background,
-  ));
+  SystemChrome.setSystemUIOverlayStyle(
+    SystemUiOverlayStyle(
+      statusBarIconBrightness:
+          themeController.themeMode.value == ThemeMode.light
+              ? Brightness.dark
+              : Brightness.light,
+      statusBarColor: AppColors.background,
+    ),
+  );
 
   runApp(const MyApp());
 }
@@ -48,17 +50,19 @@ class MyApp extends StatelessWidget {
     // Access the ThemeController
     final ThemeController themeController = Get.find();
 
-    return Obx(() => GetMaterialApp(
-          title: 'Flutter Demo',
-          translations: Languages(),
-          locale: const Locale('en', 'US'),
-          fallbackLocale: const Locale('en', 'US'),
-          debugShowCheckedModeBanner: false,
-          theme: ThemeData.light(), // Define your light theme
-          darkTheme: ThemeData.dark(), // Define your dark theme
-          themeMode: themeController.themeMode.value, // Set theme mode
-          home: const SplashView(),
-          getPages: AppRoutes.appRoutes(),
-        ));
+    return Obx(
+      () => GetMaterialApp(
+        title: 'Flutter Demo',
+        translations: Languages(),
+        locale: const Locale('en', 'US'),
+        fallbackLocale: const Locale('en', 'US'),
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData.light(), // Define your light theme
+        darkTheme: ThemeData.dark(), // Define your dark theme
+        themeMode: themeController.themeMode.value, // Set theme mode
+        home: const SplashView(),
+        getPages: AppRoutes.appRoutes(),
+      ),
+    );
   }
 }
