@@ -48,7 +48,7 @@ class HeaderWidget extends StatelessWidget {
           const Spacer(),
           GestureDetector(
             onTap: () {
-              Get.to(const notificationsView());
+              Get.to(const NotificationsView());
             },
             child: CircleAvatar(
               radius: 25,

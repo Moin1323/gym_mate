@@ -5,8 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
-
-import '../view/Notifications/notifications_view.dart';
+import 'package:gym_mate/view/dashboard/home/widgets/notifications_view.dart';
 
 class NotificationServices {
   FirebaseMessaging messaging = FirebaseMessaging.instance;
@@ -50,7 +49,7 @@ class NotificationServices {
         // Check if the notification has any payload or specific data
         if (response.payload != null) {
           // Handle the payload here and navigate to HomeView or any specific view
-          Get.to(() => NotificationsView());
+          Get.to(() => const NotificationsView());
         }
       },
     );
@@ -70,7 +69,7 @@ class NotificationServices {
     // Handle when the app is opened from a notification (background/terminated state)
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
       // Navigate to HomeView when the app is opened from a notification
-      Get.to(() => NotificationsView());
+      Get.to(() => const NotificationsView());
     });
   }
 
