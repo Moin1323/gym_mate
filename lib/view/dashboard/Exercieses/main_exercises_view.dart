@@ -17,19 +17,21 @@ class MainExercisesView extends StatelessWidget {
         title: Text(
           // App bar title for the exercise list
           title,
-          style: const TextStyle(
-              fontSize: 28, fontWeight: FontWeight.w600, color: Colors.white),
+          style: TextStyle(
+              fontSize: 28,
+              fontWeight: FontWeight.w600,
+              color: AppColors.secondary),
         ),
         backgroundColor: AppColors.background,
-        iconTheme: const IconThemeData(color: Colors.white, size: 28),
+        iconTheme: IconThemeData(color: AppColors.secondary, size: 28),
       ),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: exercises.isEmpty // Check if exercises are empty
-            ? const Center(
+            ? Center(
                 child: Text(
                   'No exercises available',
-                  style: TextStyle(color: Colors.white, fontSize: 20),
+                  style: TextStyle(color: AppColors.secondary, fontSize: 20),
                 ),
               )
             : ListView.builder(
@@ -51,7 +53,7 @@ class MainExercisesView extends StatelessWidget {
                         fit: BoxFit
                             .cover, // Cover the entire container with the image
                         colorFilter: ColorFilter.mode(
-                          Colors.grey.withOpacity(0.3),
+                          AppColors.background.withOpacity(0.4),
                           BlendMode.dstATop,
                         ),
                       ),
@@ -65,8 +67,8 @@ class MainExercisesView extends StatelessWidget {
                           // Exercise Name
                           Text(
                             exercise.name,
-                            style: const TextStyle(
-                              color: Colors.white,
+                            style: TextStyle(
+                              color: AppColors.secondary,
                               fontSize: 30,
                               fontWeight: FontWeight.bold,
                             ),
@@ -82,16 +84,16 @@ class MainExercisesView extends StatelessWidget {
                                   const SizedBox(height: 50),
                                   Text(
                                     exercise.equipment,
-                                    style: const TextStyle(
-                                      color: Colors.white,
+                                    style: TextStyle(
+                                      color: AppColors.secondary,
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
                                   Text(
                                     exercise.category,
-                                    style: const TextStyle(
-                                      color: Colors.white,
+                                    style: TextStyle(
+                                      color: AppColors.secondary,
                                       fontSize: 15,
                                       fontWeight: FontWeight.w400,
                                     ),
@@ -115,7 +117,7 @@ class MainExercisesView extends StatelessWidget {
                                         Get.to(() =>
                                             ExerciseDetail(exercise: exercise));
                                       },
-                                      child: const Text(
+                                      child: Text(
                                         "TRY",
                                         style: TextStyle(
                                           color: AppColors.background,

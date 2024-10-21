@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:gym_mate/res/colors/app_colors.dart';
 
@@ -14,25 +13,31 @@ class CustomBottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return BottomNavigationBar(
-    backgroundColor: AppColors.background,
-    
-    
+      backgroundColor: AppColors.background,
       currentIndex: currentIndex,
       onTap: onTap,
       iconSize: 30,
-      items: const [
+      items: [
         BottomNavigationBarItem(
-          icon: Icon(Icons.home,color: AppColors.primary,),
+          icon: Icon(
+            Icons.home,
+            color: AppColors.primary,
+          ),
           label: '',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.fitness_center,color: AppColors.primary,),
+          icon: Icon(
+            Icons.fitness_center,
+            color: AppColors.primary,
+          ),
           label: '',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.settings,color: AppColors.primary,),
+          icon: Icon(
+            Icons.settings,
+            color: AppColors.primary,
+          ),
           label: '',
         ),
       ],

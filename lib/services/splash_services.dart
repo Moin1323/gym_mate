@@ -1,24 +1,25 @@
 import 'package:get/get.dart';
 import 'package:gym_mate/res/routes/routes_name.dart';
-import 'package:gym_mate/view_models/controller/user_preferences/user_preferences_view_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class SplashServices {
-  UserPreferences userPreferences = UserPreferences();
+  void navigateToAppropriateView() {
+    try {
+      User? user = FirebaseAuth.instance.currentUser;
+      if (user != null) {
+        // User is logged in, navigate to the main dashboard
+        Get.offNamed(
+            RoutesName.bottomNavigationBar); // Adjust route name as necessary
+      } else {
+        // User is not logged in, navigate to the login view
+        Get.offNamed(RoutesName.loginView);
+      }
+    } catch (error) {
+      // Log the error in case navigation fails
+      print('Error navigating to the appropriate view: $error');
 
-  void isLogin() {
-    userPreferences.getUser().then(
-      (value) {
-        // If no token, navigate to login screen immediately
-        if (value.token == null || value.token!.isEmpty) {
-          Get.offNamed(RoutesName.loginView); // Navigate to login view
-        } else {
-          Get.offNamed(
-              RoutesName.homeView); // Navigate to home view if logged in
-        }
-      },
-    ).catchError((error) {
-      // Handle error by redirecting to login view
+      // Attempt to redirect to the login view if an error occurs
       Get.offNamed(RoutesName.loginView);
-    });
+    }
   }
 }
