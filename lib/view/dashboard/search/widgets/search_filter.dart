@@ -121,7 +121,7 @@ class _SearchFilterState extends State<SearchFilter> {
                           child: ListTile(
                             title: Text(
                               name,
-                              style: const TextStyle(
+                              style: TextStyle(
                                 color: AppColors.secondary,
                               ),
                             ), // Display the name of the exercise

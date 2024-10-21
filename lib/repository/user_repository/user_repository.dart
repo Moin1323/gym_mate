@@ -6,11 +6,14 @@ import 'package:gym_mate/models/login/user_model.dart';
 import 'package:gym_mate/view/auth/login/login_view.dart';
 import 'package:gym_mate/view/dashboard/Exercieses/excersice_datail.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:gym_mate/models/equipments/equipments.dart'; // Import your Equipment model
+import 'package:gym_mate/services/equipment_service.dart'; // Import the EquipmentService
 
 class UserController extends GetxController {
   var user = UserModel().obs;
   var exercises =
       <String, List<Exercise>>{}.obs; // For storing categorized exercises
+  var equipments = <Equipment>[].obs; // Observable list for storing equipments
   var isLoading = true.obs;
   var singleExercise = Exercise(
           name: "",
@@ -22,11 +25,35 @@ class UserController extends GetxController {
           difficulty: '')
       .obs; // For storing a single exercise
 
+  final EquipmentService _equipmentService =
+      EquipmentService(); // Initialize EquipmentService
+
   @override
   void onInit() {
     super.onInit();
     fetchUserData();
     fetchAllExercises();
+    fetchAllEquipments(); // Fetch equipments on initialization
+  }
+
+  // New method to fetch all equipments
+  Future<void> fetchAllEquipments() async {
+    isLoading.value = true; // Start loading
+    try {
+      List<Equipment> equipmentList =
+          await _equipmentService.fetchAllEquipments();
+      equipments.value = equipmentList; // Update the observable variable
+      print("Equipments fetched successfully: ${equipments.value}");
+    } catch (e) {
+      print("Error fetching equipments: $e");
+      Get.snackbar(
+        "Error",
+        "Failed to fetch equipment data. Please try again.",
+        snackPosition: SnackPosition.BOTTOM,
+      );
+    } finally {
+      isLoading.value = false; // Stop loading
+    }
   }
 
   Future<void> fetchUserData() async {
@@ -54,6 +81,11 @@ class UserController extends GetxController {
       }
     } catch (e) {
       print("Error fetching user data: $e");
+      Get.snackbar(
+        "Error",
+        "Failed to fetch user data. Please try again.",
+        snackPosition: SnackPosition.BOTTOM,
+      );
       await _handleLogout(); // Handle logout on error
     } finally {
       isLoading.value = false; // Stop loading

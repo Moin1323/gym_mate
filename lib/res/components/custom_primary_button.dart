@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gym_mate/res/colors/app_colors.dart';
 
 class CustomPrimaryButton extends StatelessWidget {
   final String text;
@@ -15,12 +16,20 @@ class CustomPrimaryButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: AppColors.primary, // Set the text color
+      ),
       onPressed: isLoading ? null : onPressed, // Disable button when loading
       child: isLoading
-          ? const CircularProgressIndicator(
-              color: Colors.white,
+          ? CircularProgressIndicator(
+              color: AppColors.secondary,
             )
-          : Text(text),
+          : Text(
+              text,
+              style: TextStyle(
+                color: AppColors.background,
+              ),
+            ),
     );
   }
 }

@@ -1,31 +1,17 @@
 import 'package:get/get.dart';
 import 'package:gym_mate/res/routes/routes_name.dart';
-import 'package:gym_mate/view_models/controller/user_preferences/user_preferences_view_model.dart';
 
 class SplashServices {
-  UserPreferences userPreferences = UserPreferences();
-
-  void isLogin() async {
+  void isLogin() {
     try {
-      // Retrieve user data from SharedPreferences
-      var value = await userPreferences.getUser();
-
-      // Debugging: Log the retrieved token
-      print('Token in SplashServices: ${value.token}');
-
-      // If no token, navigate to login screen
-      if (value.token == null || value.token!.isEmpty) {
-        print("No token found, navigating to login screen");
-        Get.offNamed(RoutesName.loginView); // Navigate to login view
-      } else {
-        print("Token found, navigating to home screen");
-        Get.offNamed(RoutesName.homeView); // Navigate to home view
-      }
+      // Every time the app starts, navigate directly to the login screen
+      print("Navigating to login screen");
+      Get.offNamed(RoutesName.loginView); // Navigate to login view
     } catch (error) {
-      // Debugging: Log the error if token retrieval fails
-      print('Error retrieving login status: $error');
+      // Debugging: Log the error in case navigation fails
+      print('Error navigating to login screen: $error');
 
-      // Handle error by redirecting to login view
+      // In case of an error, still attempt to redirect to login view
       Get.offNamed(RoutesName.loginView);
     }
   }

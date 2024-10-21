@@ -37,7 +37,7 @@ class _SignupViewState extends State<SignupView> {
           ),
           // Transparent overlay with form
           Container(
-            color: AppColors.background.withOpacity(.7),
+            color: Colors.black.withOpacity(.7),
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: Form(
@@ -52,7 +52,7 @@ class _SignupViewState extends State<SignupView> {
                       child: Text(
                         "Signup",
                         style: TextStyle(
-                          color: AppColors.secondary,
+                          color: Colors.white,
                           fontSize: 35,
                         ),
                       ),
@@ -65,6 +65,7 @@ class _SignupViewState extends State<SignupView> {
                       focusNode: signupVM.nameFocus,
                       labelText: 'Name',
                       hintText: 'Enter your Name',
+                      textColor: Colors.white,
                       validator: (value) {
                         if (value!.isEmpty) {
                           return "Please enter your name";
@@ -77,7 +78,8 @@ class _SignupViewState extends State<SignupView> {
                           signupVM.nameFocus,
                           signupVM.emailFocus,
                         );
-                      }, inputFormatters: [],
+                      },
+                      inputFormatters: const [],
                     ),
                     const SizedBox(height: 25),
 
@@ -87,34 +89,38 @@ class _SignupViewState extends State<SignupView> {
                       focusNode: signupVM.emailFocus,
                       labelText: 'Email',
                       hintText: 'Enter your email address',
+                      textColor: Colors.white,
                       validator: (value) {
                         if (value!.isEmpty) {
                           return "Please enter your email address";
                         }
                         return null;
-                      }, inputFormatters: [],
+                      },
+                      inputFormatters: const [],
                     ),
                     const SizedBox(height: 25),
 
                     // CNIC Field
-                  // CNIC Field
-CustomTextField(
-  controller: signupVM.cnicController,
-  focusNode: signupVM.cnicFocus,
-  labelText: 'CNIC',
-  hintText: 'Enter your CNIC',
-  validator: (value) {
-    if (value!.isEmpty) {
-      return "Please enter your CNIC";
-    }
-    if (value.length != 15) {
-      return "CNIC must be 14 characters including dashes";
-    }
-    return null;
-  },
-  inputFormatters: [CnicInputFormatter()], // Add the input formatter here
-),
-
+                    // CNIC Field
+                    CustomTextField(
+                      controller: signupVM.cnicController,
+                      focusNode: signupVM.cnicFocus,
+                      labelText: 'CNIC',
+                      hintText: 'Enter your CNIC',
+                      textColor: Colors.white,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "Please enter your CNIC";
+                        }
+                        if (value.length != 15) {
+                          return "CNIC must be 14 characters including dashes";
+                        }
+                        return null;
+                      },
+                      inputFormatters: [
+                        CnicInputFormatter()
+                      ], // Add the input formatter here
+                    ),
 
                     const SizedBox(height: 25),
 
@@ -124,13 +130,15 @@ CustomTextField(
                       focusNode: signupVM.passwordFocus,
                       labelText: 'Password',
                       hintText: 'Enter your password',
+                      textColor: Colors.white,
                       obscureText: true,
                       validator: (value) {
                         if (value!.isEmpty) {
                           return "Please enter your password";
                         }
                         return null;
-                      }, inputFormatters: [],
+                      },
+                      inputFormatters: const [],
                     ),
                     const SizedBox(height: 25),
 
@@ -140,6 +148,7 @@ CustomTextField(
                       focusNode: signupVM.confirmPasswordFocus,
                       labelText: 'Confirm Password',
                       hintText: 'Re-enter your password',
+                      textColor: Colors.white,
                       obscureText: true,
                       validator: (value) {
                         if (value!.isEmpty) {
@@ -149,7 +158,8 @@ CustomTextField(
                           return "Passwords do not match";
                         }
                         return null;
-                      }, inputFormatters: [],
+                      },
+                      inputFormatters: const [],
                     ),
                     const SizedBox(height: 60),
 
@@ -175,7 +185,7 @@ CustomTextField(
                             : const Text(
                                 'SignUp',
                                 style: TextStyle(
-                                    color: AppColors.background, fontSize: 20),
+                                    color: Colors.black, fontSize: 20),
                               );
                       }),
                     ),
@@ -185,8 +195,8 @@ CustomTextField(
                     RichText(
                       text: TextSpan(
                         text: "Already have an account? ",
-                        style: const TextStyle(
-                            color: AppColors.secondary, fontSize: 16),
+                        style:
+                            const TextStyle(color: Colors.white, fontSize: 16),
                         children: [
                           TextSpan(
                             text: "Login",
