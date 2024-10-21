@@ -90,7 +90,7 @@ class _HomeViewState extends State<HomeView> {
                       onTap: () {
                         Get.to(notifications_view());
                       },
-                      child: const CircleAvatar(
+                      child: CircleAvatar(
                         radius: 25,
                         backgroundColor: Colors.white24,
                         child: Icon(
