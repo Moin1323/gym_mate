@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:gym_mate/res/colors/app_colors.dart';
 
-class notifications_view extends StatefulWidget {
-  const notifications_view({super.key});
+class notificationsView extends StatefulWidget {
+  const notificationsView({super.key});
 
   @override
-  State<notifications_view> createState() => _notifications_viewState();
+  State<notificationsView> createState() => _notificationsViewState();
 }
 
-class _notifications_viewState extends State<notifications_view> {
+class _notificationsViewState extends State<notificationsView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
