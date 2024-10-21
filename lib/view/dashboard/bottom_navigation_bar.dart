@@ -51,7 +51,6 @@ class _BottomNavigationbarState extends State<BottomNavigationbar> {
           unselectedItemColor: AppColors.secondary,
           backgroundColor: AppColors.background,
           onTap: (index) {
-            print("Current Index: $index"); // Debugging line
             homeController.changeIndex(index);
           },
           type: BottomNavigationBarType.fixed,

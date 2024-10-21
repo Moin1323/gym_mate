@@ -8,7 +8,7 @@ import 'package:gym_mate/res/colors/app_colors.dart';
 import 'package:gym_mate/res/getx_localization/languages.dart';
 import 'package:gym_mate/res/routes/app_routes.dart';
 import 'package:gym_mate/res/theme/theme_controller.dart';
-import 'package:gym_mate/view/dashboard/bottom_navigation_bar.dart';
+import 'package:gym_mate/view/splash/splash_view.dart';
 
 import 'firebase_options.dart';
 
@@ -57,7 +57,7 @@ class MyApp extends StatelessWidget {
           theme: ThemeData.light(), // Define your light theme
           darkTheme: ThemeData.dark(), // Define your dark theme
           themeMode: themeController.themeMode.value, // Set theme mode
-          home: const BottomNavigationbar(),
+          home: const SplashView(),
           getPages: AppRoutes.appRoutes(),
         ));
   }

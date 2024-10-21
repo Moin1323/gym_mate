@@ -23,13 +23,12 @@ class _LoginViewState extends State<LoginView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: true, // Enable for keyboard adjustment
+      resizeToAvoidBottomInset: true,
       body: SingleChildScrollView(
         child: Stack(
           children: [
-            // Background Image
             Container(
-              height: MediaQuery.of(context).size.height, // Full-screen height
+              height: MediaQuery.of(context).size.height,
               decoration: const BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage(ImageAssets.background),
@@ -37,7 +36,6 @@ class _LoginViewState extends State<LoginView> {
                 ),
               ),
             ),
-            // Transparent overlay
             Container(
               height: MediaQuery.of(context).size.height,
               color: Colors.black.withOpacity(.7),
@@ -49,7 +47,6 @@ class _LoginViewState extends State<LoginView> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const SizedBox(height: 150),
-                      // Title: Login
                       const Align(
                         alignment: Alignment.centerLeft,
                         child: Text("Login",
@@ -60,7 +57,6 @@ class _LoginViewState extends State<LoginView> {
                             )),
                       ),
                       const SizedBox(height: 30),
-                      // Email TextField
                       CustomTextField(
                         controller: loginVM.emailController,
                         focusNode: loginVM.emailFocusNode,
@@ -83,7 +79,6 @@ class _LoginViewState extends State<LoginView> {
                         inputFormatters: const [],
                       ),
                       const SizedBox(height: 30),
-                      // Password TextField
                       CustomTextField(
                         controller: loginVM.passwordController,
                         focusNode: loginVM.passwordFocusNode,
@@ -102,11 +97,9 @@ class _LoginViewState extends State<LoginView> {
                         inputFormatters: const [],
                       ),
                       const SizedBox(height: 10),
-                      // Forgot Password
                       TextButton(
                         onPressed: () {
-                          Get.to(() =>
-                              ForgotPasswordView()); // Navigate to ForgotPasswordView
+                          Get.to(() => ForgotPasswordView());
                         },
                         child: const Align(
                           alignment: Alignment.centerRight,
@@ -120,11 +113,10 @@ class _LoginViewState extends State<LoginView> {
                         ),
                       ),
                       const SizedBox(height: 60),
-                      // Login Button
                       ElevatedButton(
                         onPressed: () {
                           if (formKey.currentState!.validate()) {
-                            loginVM.loginApi(); // Trigger login API call
+                            loginVM.loginApi();
                           }
                         },
                         style: ElevatedButton.styleFrom(
@@ -147,7 +139,6 @@ class _LoginViewState extends State<LoginView> {
                         }),
                       ),
                       const SizedBox(height: 10),
-                      // Signup Redirect
                       RichText(
                         text: TextSpan(
                           text: "Don't have an account? ",
@@ -164,8 +155,7 @@ class _LoginViewState extends State<LoginView> {
                               ),
                               recognizer: TapGestureRecognizer()
                                 ..onTap = () {
-                                  Get.to(() =>
-                                      const SignupView()); // Navigate to SignupView
+                                  Get.to(() => const SignupView());
                                 },
                             ),
                           ],
