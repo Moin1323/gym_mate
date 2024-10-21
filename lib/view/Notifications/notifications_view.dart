@@ -16,12 +16,12 @@ class _notifications_viewState extends State<notifications_view> {
         appBar: AppBar(
           backgroundColor: AppColors.background,
           iconTheme: IconThemeData(
-            color: Colors.white, // Set the leading arrow color to white
+            color: AppColors.secondary, // Set the leading arrow color to white
           ),
           title: Center(
             child: Row(
               children: [
-                SizedBox(
+                const SizedBox(
                   width: 30,
                 ),
                 Text(
@@ -32,7 +32,7 @@ class _notifications_viewState extends State<notifications_view> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 5,
                 ),
                 Icon(

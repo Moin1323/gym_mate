@@ -6,6 +6,7 @@ class CustomTextField extends StatelessWidget {
   final FocusNode focusNode;
   final String labelText;
   final String hintText;
+  final Color? textColor;
   final bool obscureText;
   final String? Function(String?)? validator;
   final ValueChanged<String>? onFieldSubmitted;
@@ -16,9 +17,11 @@ class CustomTextField extends StatelessWidget {
     required this.focusNode,
     required this.labelText,
     required this.hintText,
+    this.textColor,
     this.obscureText = false,
     this.validator,
-    this.onFieldSubmitted, required List<dynamic> inputFormatters,
+    this.onFieldSubmitted,
+    required List<dynamic> inputFormatters,
   });
 
   @override
@@ -28,26 +31,30 @@ class CustomTextField extends StatelessWidget {
       focusNode: focusNode,
       obscureText: obscureText,
       validator: validator,
-      style: const TextStyle(color: AppColors.secondary, fontSize: 18), // Text color
+      style: TextStyle(
+          color: textColor ?? AppColors.secondary, fontSize: 18), // Text color
       onFieldSubmitted: onFieldSubmitted,
       decoration: InputDecoration(
         labelText: labelText,
-        labelStyle: const TextStyle(color: Colors.white),
+        labelStyle: TextStyle(
+          color: textColor ?? AppColors.secondary,
+        ),
         hintText: hintText,
-        hintStyle: const TextStyle(color: Colors.white), 
+        hintStyle: const TextStyle(color: Colors.white),
         filled: true,
-        fillColor: Colors.grey.withOpacity(0.3), 
+        fillColor: Colors.grey.withOpacity(0.3),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-        
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: AppColors.primary), // Color when focused
+          borderSide:
+              BorderSide(color: AppColors.primary), // Color when focused
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide:  BorderSide(color: Colors.grey.withOpacity(.5)), // Color when enabled
+          borderSide: BorderSide(
+              color: Colors.grey.withOpacity(.5)), // Color when enabled
         ),
       ),
     );

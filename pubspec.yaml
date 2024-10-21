@@ -79,6 +79,7 @@ flutter:
     - lib/assets/images/cardio2.png
     - lib/assets/images/
     - lib/assets/images/animations/
+    - 'lib/assets/images/logo/logo_landscape.png'
 
     
 

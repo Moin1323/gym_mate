@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:gym_mate/res/colors/app_colors.dart';
+import 'package:gym_mate/res/theme/theme_controller.dart';
+import 'package:gym_mate/view/Notifications/notifications_view.dart';
 import 'package:gym_mate/view/auth/forgetPassword/forget_password_view.dart';
 import 'package:gym_mate/view/auth/profile_/ProfileEditView.dart';
-import 'package:gym_mate/view/dashboard/home/home_view.dart';
 import 'package:gym_mate/view_models/controller/login/login_view_model.dart';
 import 'widgets/AccountTile.dart';
 
@@ -17,14 +17,11 @@ class SettingsView extends StatefulWidget {
 
 class _SettingsViewState extends State<SettingsView> {
   final LoginViewModel loginVM = Get.put(LoginViewModel());
+  final ThemeController themeController =
+      Get.put(ThemeController()); // Initialize ThemeController
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      statusBarIconBrightness: Brightness.light,
-      statusBarColor: AppColors.background,
-    ));
-
     // Get current user information
     final user = loginVM.getCurrentUser();
 
@@ -57,7 +54,7 @@ class _SettingsViewState extends State<SettingsView> {
                 SizedBox(height: Get.height * 0.002),
                 Text(
                   user?.displayName ?? 'User Name', // Fallback for no user
-                  style: const TextStyle(
+                  style: TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
                       color: AppColors.secondary),
@@ -76,7 +73,9 @@ class _SettingsViewState extends State<SettingsView> {
                       child: Text(
                         '👑 Id: 1237', // Replace with dynamic ID if available
                         style: TextStyle(
-                            fontSize: 12, fontWeight: FontWeight.bold),
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black),
                         textAlign: TextAlign.center,
                       ),
                     ),
@@ -104,32 +103,25 @@ class _SettingsViewState extends State<SettingsView> {
                     trailingIcon: Icons.chevron_right,
                     destinationScreen: ForgotPasswordView(),
                   ),
-                  const AccountTile(
-                    accountName: 'Subscription',
-                    leadingIcon: Icons.subscriptions_rounded,
-                    trailingIcon: Icons.chevron_right,
-                  ),
-                  const AccountTile(
-                    accountName: 'Saved Items',
-                    leadingIcon: Icons.favorite,
-                    trailingIcon: Icons.chevron_right,
-                  ),
                   AccountTile(
                     accountName: 'Notifications',
                     leadingIcon: Icons.notifications,
-                    showSwitch: true,
+                    trailingIcon: Icons.chevron_right,
+                    destinationScreen:
+                        const notifications_view(), // Pass the ThemeController
                   ),
-                  const AccountTile(
-                    accountName: 'Theme',
+                  AccountTile(
+                    accountName: 'Dark Theme',
                     leadingIcon: Icons.color_lens_outlined,
                     showSwitch: true,
                   ),
                   AccountTile(
                     accountName: 'Log out',
                     leadingIcon: Icons.logout,
+                    trailingIcon: Icons.chevron_right,
                     onPressed: () {
-                      print("Logout pressed");
-                      loginVM.logout(); // Call the logout function from the view model
+                      loginVM
+                          .logout(); // Call the logout function from the view model
                     },
                   ),
                 ],

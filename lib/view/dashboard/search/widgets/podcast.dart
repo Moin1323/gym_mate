@@ -23,7 +23,7 @@ class _VideoLoaderState extends State<VideoLoader> {
     if (videoID != null) {
       _controller = YoutubePlayerController(
         initialVideoId: videoID!,
-        flags: YoutubePlayerFlags(
+        flags: const YoutubePlayerFlags(
           autoPlay: false,
           mute: false, // Ensure the video is not muted
         ),
@@ -53,7 +53,7 @@ class _VideoLoaderState extends State<VideoLoader> {
                   controller: _controller,
                   showVideoProgressIndicator: true,
                   onReady: () => debugPrint('Player is ready'),
-                  bottomActions: [
+                  bottomActions: const [
                     CurrentPosition(),
                     ProgressBar(
                       isExpanded: true,
@@ -67,7 +67,7 @@ class _VideoLoaderState extends State<VideoLoader> {
                 ),
               ),
             )
-          : Center(
+          : const Center(
               child: Text(
                 'Invalid video URL or Video ID',
                 style: TextStyle(color: Colors.red),

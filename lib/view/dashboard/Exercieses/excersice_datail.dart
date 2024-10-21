@@ -15,13 +15,13 @@ class ExerciseDetail extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: AppColors.background,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, size: 30, color: Colors.white),
+          icon: Icon(Icons.arrow_back, size: 30, color: AppColors.secondary),
           onPressed: () => Get.back(),
         ),
         title: Text(
           exercise.name,
-          style: const TextStyle(
-            color: Colors.white,
+          style: TextStyle(
+            color: AppColors.secondary,
             fontSize: 25,
             fontWeight: FontWeight.w600,
           ),
@@ -36,7 +36,7 @@ class ExerciseDetail extends StatelessWidget {
               height: 200,
               decoration: BoxDecoration(
                 color: AppColors.primary,
-                border: Border.all(color: Colors.black, width: 2),
+                border: Border.all(color: AppColors.background, width: 2),
                 borderRadius: BorderRadius.circular(16),
               ),
               clipBehavior: Clip.antiAlias,
@@ -85,9 +85,9 @@ class ExerciseDetail extends StatelessWidget {
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Card(
-                      elevation: 10,
+                      elevation: 0,
                       borderOnForeground: true,
-                      color: Colors.grey.withOpacity(.1),
+                      color: AppColors.secondary.withOpacity(.1),
                       child: Container(
                         padding: const EdgeInsets.all(5),
                         child: ListTile(
@@ -96,20 +96,23 @@ class ExerciseDetail extends StatelessWidget {
                             height: 30,
                             width: 30,
                             decoration: BoxDecoration(
-                                color: Colors.white,
+                                color: AppColors.primary,
                                 borderRadius: BorderRadius.circular(5)),
                             child: Center(
                                 child: Text(
                               val.toString(),
-                              style: const TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: AppColors.background,
+                              ),
                             )),
                           ),
 
                           title: Text(
                             exercise.instructions[index].details,
-                            style: const TextStyle(
-                                color: Colors.white, fontSize: 14),
+                            style: TextStyle(
+                                color: AppColors.secondary, fontSize: 14),
                           ),
                         ),
                       ),
@@ -139,16 +142,16 @@ class ExerciseDetail extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppColors.background,
         borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: Colors.white),
+        border: Border.all(color: AppColors.secondary),
       ),
       padding: const EdgeInsets.all(8),
       child: Row(
         children: [
-          Icon(icon, color: Colors.white),
+          Icon(icon, color: AppColors.secondary),
           const SizedBox(width: 8),
           Text(
             text,
-            style: const TextStyle(color: Colors.white),
+            style: TextStyle(color: AppColors.secondary),
           ),
         ],
       ),

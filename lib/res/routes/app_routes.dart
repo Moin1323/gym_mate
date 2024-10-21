@@ -21,7 +21,7 @@ class AppRoutes {
           transition: Transition.leftToRightWithFade,
         ),
         GetPage(
-          name: RoutesName.loginView,
+          name: RoutesName.signUpView,
           page: () => const SignupView(),
           transitionDuration: const Duration(milliseconds: 250),
           transition: Transition.leftToRightWithFade,
