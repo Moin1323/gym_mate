@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:gym_mate/view/dashboard/search/search_view/search_view.dart';
+import 'package:gym_mate/res/colors/app_colors.dart';
+import 'package:gym_mate/view/dashboard/search/search_view.dart';
 import 'package:gym_mate/view_models/controller/home_controller.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -15,21 +16,19 @@ class BottomNavigationbar extends StatefulWidget {
 }
 
 class _BottomNavigationbarState extends State<BottomNavigationbar> {
-  // Instantiate HomeController
   final HomeController homeController = Get.put(HomeController());
 
-  // List of screens
   final List<Widget> _screens = [
     const HomeView(),
     const SearchView(),
-    const SettingsView()
+    const SettingsView(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Obx(() {
-        return _screens[homeController.currentIndex.value]; // Display the selected screen
+        return _screens[homeController.currentIndex.value];
       }),
       bottomNavigationBar: Obx(() {
         return BottomNavigationBar(
@@ -47,12 +46,12 @@ class _BottomNavigationbarState extends State<BottomNavigationbar> {
               label: '',
             ),
           ],
-          currentIndex: homeController.currentIndex.value, // Current index from HomeController
-          selectedItemColor: const Color(0xFFA3EC3E), // Color for the selected item
-          unselectedItemColor: Colors.white, // Color for unselected items
-          backgroundColor: const Color(0xFF000000), // Background color of the Bottom Navigation Bar
+          currentIndex: homeController.currentIndex.value,
+          selectedItemColor: AppColors.primary,
+          unselectedItemColor: AppColors.secondary,
+          backgroundColor: AppColors.background,
           onTap: (index) {
-            homeController.changeIndex(index); // Change index when tapped
+            homeController.changeIndex(index);
           },
           type: BottomNavigationBarType.fixed,
         );

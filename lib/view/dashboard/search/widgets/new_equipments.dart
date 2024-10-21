@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:gym_mate/models/exercise/exercise.dart';
+import 'package:gym_mate/models/equipments/equipments.dart';
 import 'package:gym_mate/repository/user_repository/user_repository.dart';
 import 'package:gym_mate/res/colors/app_colors.dart';
-import 'package:gym_mate/view/dashboard/Exercieses/excersice_datail.dart';
-import 'package:gym_mate/view/dashboard/Exercieses/main_exercises_view.dart';
 
-class PopularTrainings extends StatelessWidget {
+class NewEquipments extends StatelessWidget {
   final UserController userController = Get.put(UserController());
-  final List<Exercise> trainings;
+  final List<Equipment> equipments; // List of equipments
   final String title;
   final bool isLoading;
 
-  PopularTrainings({
+  NewEquipments({
     super.key,
-    required this.trainings,
+    required this.equipments,
     required this.isLoading,
     required this.title,
   });
@@ -27,16 +25,13 @@ class PopularTrainings extends StatelessWidget {
         Row(
           children: [
             Text(
-              "Popular Trainings 🔥",
+              "New Equipments 🏋️‍♂️",
               style: TextStyle(
                   color: AppColors.secondary, fontWeight: FontWeight.bold),
             ),
             const Spacer(),
             TextButton(
-              onPressed: () {
-                Get.to(() =>
-                    MainExercisesView(title: title, exercises: trainings));
-              },
+              onPressed: () {},
               child: const Text(
                 'See all',
                 style:
@@ -55,10 +50,10 @@ class PopularTrainings extends StatelessWidget {
             : SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
-                  children: trainings.map((training) {
+                  children: equipments.map((equipment) {
                     return Padding(
                       padding: EdgeInsets.only(right: Get.width * 0.04),
-                      child: _buildTrainingCard(training),
+                      child: _buildEquipmentCard(equipment),
                     );
                   }).toList(),
                 ),
@@ -67,28 +62,24 @@ class PopularTrainings extends StatelessWidget {
     );
   }
 
-  // Helper method to build individual training cards with dynamic sizing
-  Widget _buildTrainingCard(Exercise training) {
-    double cardHeight = Get.height * 0.30; // 30% of screen height
-    double cardWidth = Get.width * 0.70; // 70% of screen width
-
+  // Helper method to build individual equipment cards
+  Widget _buildEquipmentCard(Equipment equipment) {
     return GestureDetector(
       onTap: () {
-        // Navigate to ExerciseDetail screen
-        Get.to(() => ExerciseDetail(exercise: training));
+        // Navigate to EquipmentDetail screen
       },
       child: Stack(
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(18),
             child: Container(
-              height: cardHeight,
-              width: cardWidth,
+              height: Get.height * 0.30,
+              width: Get.width * 0.4,
               decoration: BoxDecoration(
                 color: AppColors.primary,
               ),
               child: Image.network(
-                training.animationUrl,
+                equipment.imageUrl, // Use imageUrl from Equipment model
                 fit: BoxFit.cover,
                 errorBuilder: (context, error, stackTrace) {
                   return const Center(child: Text('Image not available'));
@@ -99,8 +90,8 @@ class PopularTrainings extends StatelessWidget {
           Positioned(
             bottom: 0,
             child: Container(
-              height: cardHeight,
-              width: cardWidth,
+              height: Get.height * 0.30,
+              width: Get.width * 0.40,
               decoration: BoxDecoration(
                 color: AppColors.background.withOpacity(0.4),
               ),
@@ -112,20 +103,20 @@ class PopularTrainings extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      training.name,
+                      equipment.name,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
                       style: TextStyle(
                           color: AppColors.secondary,
                           fontWeight: FontWeight.bold,
-                          fontSize: 24), // Increased font size
+                          fontSize: 26),
                     ),
                     Text(
-                      training.category,
+                      equipment.category,
                       style: TextStyle(
                           color: AppColors.secondary,
                           fontWeight: FontWeight.w500,
-                          fontSize: 16), // Increased font size
+                          fontSize: 12),
                     ),
                   ],
                 ),

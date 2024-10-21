@@ -23,150 +23,151 @@ class _LoginViewState extends State<LoginView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: Stack(
-        children: [
-          // Background Image
-          Container(
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(ImageAssets.background),
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-          // Transparent overlay
-          Container(
-            color: AppColors.background.withOpacity(.7),
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Form(
-                key: formKey,
-                child: Column(
-                  children: [
-                    const SizedBox(height: 200),
-                    // Title: Login
-                    const Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text("Login",
-                          style: TextStyle(
-                            color: AppColors.secondary,
-                            fontSize: 35,
-                            fontFamily: 'Satoshi',
-                          )),
-                    ),
-                    const SizedBox(height: 30),
-                    // Email TextField
-                    CustomTextField(
-                      controller: loginVM.emailController,
-                      focusNode: loginVM.emailFocusNode,
-                      labelText: 'Email',
-                      hintText: 'Enter your Email',
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Please enter your email";
-                        }
-                        return null;
-                      },
-                      onFieldSubmitted: (value) {
-                        Utils.fieldFocusChange(
-                          context,
-                          loginVM.emailFocusNode,
-                          loginVM.passwordFocusNode,
-                        );
-                      },
-                      inputFormatters: const [],
-                    ),
-                    const SizedBox(height: 30),
-                    // Password TextField
-                    CustomTextField(
-                      controller: loginVM.passwordController,
-                      focusNode: loginVM.passwordFocusNode,
-                      labelText: 'Password',
-                      hintText: 'Enter your password',
-                      obscureText: true,
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Please enter your password";
-                        }
-                        return null;
-                      },
-                      inputFormatters: const [],
-                    ),
-                    const SizedBox(height: 10),
-                    // Forgot Password
-                   TextButton(
-  onPressed: () {
-    Get.to(() => ForgotPasswordView()); // Navigate to ForgotPasswordView
-  },
-  child: const Align(
-    alignment: Alignment.centerRight,
-    child: Text(
-      "Forgot your password?",
-      style: TextStyle(
-        color: AppColors.secondary,
-        fontSize: 16,
-      ),
-    ),
-  ),
-),
-                    const SizedBox(height: 60),
-                    // Login Button
-                    ElevatedButton(
-                      onPressed: () {
-                        if (formKey.currentState!.validate()) {
-                          loginVM.loginApi();
-                        }
-                      },
-                      style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 100, vertical: 15),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        backgroundColor: AppColors.primary,
-                      ),
-                      child: Obx(() {
-                        return loginVM.loading.value
-                            ? const CircularProgressIndicator(
-                                color: Colors.white)
-                            : const Text(
-                                'Login',
-                                style: TextStyle(
-                                    color: AppColors.background, fontSize: 20),
-                              );
-                      }),
-                    ),
-                    const SizedBox(height: 10),
-                    // Signup Redirect
-                    RichText(
-                      text: TextSpan(
-                        text: "Don't have an account? ",
-                        style: const TextStyle(
-                            color: AppColors.secondary, fontSize: 16),
-                        children: [
-                          TextSpan(
-                            text: "Signup",
-                            style: const TextStyle(
-                              color: Colors.blue,
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              decoration: TextDecoration.underline,
-                            ),
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () {
-                                Get.to(() => const SignupView());
-                              },
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
+      resizeToAvoidBottomInset: true,
+      body: SingleChildScrollView(
+        child: Stack(
+          children: [
+            Container(
+              height: MediaQuery.of(context).size.height,
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(ImageAssets.background),
+                  fit: BoxFit.cover,
                 ),
               ),
             ),
-          ),
-        ],
+            Container(
+              height: MediaQuery.of(context).size.height,
+              color: Colors.black.withOpacity(.7),
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Form(
+                  key: formKey,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const SizedBox(height: 150),
+                      const Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text("Login",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 35,
+                              fontFamily: 'Satoshi',
+                            )),
+                      ),
+                      const SizedBox(height: 30),
+                      CustomTextField(
+                        controller: loginVM.emailController,
+                        focusNode: loginVM.emailFocusNode,
+                        labelText: 'Email',
+                        hintText: 'Enter your Email',
+                        textColor: Colors.white,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Please enter your email";
+                          }
+                          return null;
+                        },
+                        onFieldSubmitted: (value) {
+                          Utils.fieldFocusChange(
+                            context,
+                            loginVM.emailFocusNode,
+                            loginVM.passwordFocusNode,
+                          );
+                        },
+                        inputFormatters: const [],
+                      ),
+                      const SizedBox(height: 30),
+                      CustomTextField(
+                        controller: loginVM.passwordController,
+                        focusNode: loginVM.passwordFocusNode,
+                        labelText: 'Password',
+                        hintText: 'Enter your password',
+                        textColor: Colors.white,
+                        obscureText: true,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Please enter your password";
+                          } else if (value.length < 6) {
+                            return "Password must be at least 6 characters long";
+                          }
+                          return null;
+                        },
+                        inputFormatters: const [],
+                      ),
+                      const SizedBox(height: 10),
+                      TextButton(
+                        onPressed: () {
+                          Get.to(() => ForgotPasswordView());
+                        },
+                        child: const Align(
+                          alignment: Alignment.centerRight,
+                          child: Text(
+                            "Forgot your password?",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 60),
+                      ElevatedButton(
+                        onPressed: () {
+                          if (formKey.currentState!.validate()) {
+                            loginVM.loginApi();
+                          }
+                        },
+                        style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 100, vertical: 15),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          backgroundColor: AppColors.primary,
+                        ),
+                        child: Obx(() {
+                          return loginVM.loading.value
+                              ? const CircularProgressIndicator(
+                                  color: Colors.white)
+                              : const Text(
+                                  'Login',
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 20),
+                                );
+                        }),
+                      ),
+                      const SizedBox(height: 10),
+                      RichText(
+                        text: TextSpan(
+                          text: "Don't have an account? ",
+                          style: const TextStyle(
+                              color: Colors.white, fontSize: 16),
+                          children: [
+                            TextSpan(
+                              text: "Signup",
+                              style: const TextStyle(
+                                color: Colors.blue,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                decoration: TextDecoration.underline,
+                              ),
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () {
+                                  Get.to(() => const SignupView());
+                                },
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

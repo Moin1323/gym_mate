@@ -33,7 +33,7 @@ class _Search_ConatinerState extends State<Search_Conatiner> {
           ),
           child: Row(
             children: [
-              const Icon(
+              Icon(
                 Iconsax.search_normal_1,
                 color: AppColors.secondary,
               ),

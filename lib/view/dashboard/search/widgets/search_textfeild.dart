@@ -28,7 +28,7 @@ class _SearchTextfeildState extends State<SearchTextfeild> {
       onChanged: (value) {
         controller.updateSearchText(value); // Update search text
       },
-      style: const TextStyle(color: Colors.white), // Set text color to white
+      style: TextStyle(color: AppColors.secondary), // Set text color to white
       decoration: InputDecoration(
         hintText: "Search workout..",
         hintStyle: const TextStyle(color: Colors.grey), // Hint text color
@@ -40,10 +40,10 @@ class _SearchTextfeildState extends State<SearchTextfeild> {
         focusedBorder: OutlineInputBorder(
           borderRadius:
               BorderRadius.circular(27), // Rounded corners when focused
-          borderSide: const BorderSide(
-              color: AppColors.primary), // Border color when focused
+          borderSide:
+              BorderSide(color: AppColors.primary), // Border color when focused
         ),
-        prefixIcon: const Icon(
+        prefixIcon: Icon(
           Iconsax.search_normal_1,
           color: AppColors.secondary, // Place icon at the start
         ),

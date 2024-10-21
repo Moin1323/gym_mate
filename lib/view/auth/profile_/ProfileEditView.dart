@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gym_mate/res/colors/app_colors.dart';
+import 'package:gym_mate/res/components/custom_text_field.dart';
 import 'package:gym_mate/view_models/controller/profile_controller.dart';
 
 class ProfileEditView extends StatelessWidget {
@@ -12,13 +13,13 @@ class ProfileEditView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-       
-        backgroundColor: Colors.black,
+        backgroundColor: AppColors.background,
+        title: const Text("Edit Profile"),
         leading: IconButton(
           onPressed: () {
             Get.back();
           },
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          icon: Icon(Icons.arrow_back, color: AppColors.secondary),
         ),
       ),
       body: Padding(
@@ -27,34 +28,43 @@ class ProfileEditView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 20),
-            TextField(
+            CustomTextField(
               controller: profileController.nameController,
-              style: const TextStyle(color: Colors.white),
-              decoration: InputDecoration(
-                labelText: 'Name',
-                hintText: 'Enter your name',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                prefixIcon: const Icon(Icons.person),
-              ),
+              focusNode: FocusNode(), // You can manage the focus node as needed
+              labelText: 'Name',
+              hintText: 'Enter your name',
+              textColor: AppColors.secondary,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter your name';
+                }
+                return null;
+              },
+              onFieldSubmitted: (value) {
+                // Handle on submitted logic if needed
+              },
+              inputFormatters: const [], // Add any input formatters if needed
             ),
             const SizedBox(height: 20),
-            TextField(
-              style: const TextStyle(color: Colors.white),
+            CustomTextField(
               controller: profileController.emailController,
-              decoration: InputDecoration(
-                labelText: 'Email',
-                hintText: 'Enter your email',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                prefixIcon: const Icon(Icons.email),
-              ),
-              keyboardType: TextInputType.emailAddress,
+              focusNode: FocusNode(), // You can manage the focus node as needed
+              labelText: 'Email',
+              hintText: 'Enter your email',
+              textColor: AppColors.secondary,
+              obscureText: false,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter your email';
+                }
+                // Add email validation logic if needed
+                return null;
+              },
+              onFieldSubmitted: (value) {
+                // Handle on submitted logic if needed
+              },
+              inputFormatters: const [], // Add any input formatters if needed
             ),
-            const SizedBox(height: 20),
-         
             const SizedBox(height: 40),
             Center(
               child: ElevatedButton(
@@ -69,7 +79,7 @@ class ProfileEditView extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
-                child: const Text(
+                child: Text(
                   'Save Changes',
                   style: TextStyle(
                     fontSize: 18,

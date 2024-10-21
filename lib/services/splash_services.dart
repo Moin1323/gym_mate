@@ -1,31 +1,24 @@
 import 'package:get/get.dart';
 import 'package:gym_mate/res/routes/routes_name.dart';
-import 'package:gym_mate/view_models/controller/user_preferences/user_preferences_view_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class SplashServices {
-  UserPreferences userPreferences = UserPreferences();
-
-  void isLogin() async {
+  void navigateToAppropriateView() {
     try {
-      // Retrieve user data from SharedPreferences
-      var value = await userPreferences.getUser();
-
-      // Debugging: Log the retrieved token
-      print('Token in SplashServices: ${value.token}');
-
-      // If no token, navigate to login screen
-      if (value.token == null || value.token!.isEmpty) {
-        print("No token found, navigating to login screen");
-        Get.offNamed(RoutesName.loginView); // Navigate to login view
+      User? user = FirebaseAuth.instance.currentUser;
+      if (user != null) {
+        // User is logged in, navigate to the main dashboard
+        Get.offNamed(
+            RoutesName.bottomNavigationBar); // Adjust route name as necessary
       } else {
-        print("Token found, navigating to home screen");
-        Get.offNamed(RoutesName.homeView); // Navigate to home view
+        // User is not logged in, navigate to the login view
+        Get.offNamed(RoutesName.loginView);
       }
     } catch (error) {
-      // Debugging: Log the error if token retrieval fails
-      print('Error retrieving login status: $error');
+      // Log the error in case navigation fails
+      print('Error navigating to the appropriate view: $error');
 
-      // Handle error by redirecting to login view
+      // Attempt to redirect to the login view if an error occurs
       Get.offNamed(RoutesName.loginView);
     }
   }
