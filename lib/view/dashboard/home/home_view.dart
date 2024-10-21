@@ -99,7 +99,7 @@ class _HomeViewState extends State<HomeView> {
           const Spacer(),
           GestureDetector(
             onTap: () {
-              Get.to(const notifications_view());
+              Get.to(NotificationsView());
             },
             child: CircleAvatar(
               radius: 25,

@@ -6,6 +6,7 @@ import 'package:gym_mate/view/Notifications/notifications_view.dart';
 import 'package:gym_mate/view/auth/forgetPassword/forget_password_view.dart';
 import 'package:gym_mate/view/auth/profile_/ProfileEditView.dart';
 import 'package:gym_mate/view_models/controller/login/login_view_model.dart';
+
 import 'widgets/AccountTile.dart';
 
 class SettingsView extends StatefulWidget {
@@ -108,7 +109,7 @@ class _SettingsViewState extends State<SettingsView> {
                     leadingIcon: Icons.notifications,
                     trailingIcon: Icons.chevron_right,
                     destinationScreen:
-                        const notifications_view(), // Pass the ThemeController
+                        NotificationsView(), // Pass the ThemeController
                   ),
                   AccountTile(
                     accountName: 'Dark Theme',
