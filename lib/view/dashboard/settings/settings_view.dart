@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gym_mate/res/colors/app_colors.dart';
 import 'package:gym_mate/res/theme/theme_controller.dart';
-import 'package:gym_mate/view/Notifications/notifications_view.dart';
+import 'package:gym_mate/view/dashboard/home/widgets/notifications_view.dart';
 import 'package:gym_mate/view/auth/forgetPassword/forget_password_view.dart';
 import 'package:gym_mate/view/auth/profile_/ProfileEditView.dart';
 import 'package:gym_mate/view_models/controller/login/login_view_model.dart';
@@ -109,7 +109,7 @@ class _SettingsViewState extends State<SettingsView> {
                     leadingIcon: Icons.notifications,
                     trailingIcon: Icons.chevron_right,
                     destinationScreen:
-                        NotificationsView(), // Pass the ThemeController
+                        const NotificationsView(), // Pass the ThemeController
                   ),
                   AccountTile(
                     accountName: 'Dark Theme',
