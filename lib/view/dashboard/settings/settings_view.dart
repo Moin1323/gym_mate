@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gym_mate/res/colors/app_colors.dart';
 import 'package:gym_mate/res/theme/theme_controller.dart';
-import 'package:gym_mate/view/dashboard/home/widgets/notifications_view.dart';
 import 'package:gym_mate/view/auth/forgetPassword/forget_password_view.dart';
 import 'package:gym_mate/view/auth/profile_/ProfileEditView.dart';
 import 'package:gym_mate/view_models/controller/login/login_view_model.dart';
 
+import '../../Notifications/notifications_view.dart';
 import 'widgets/AccountTile.dart';
 
 class SettingsView extends StatefulWidget {

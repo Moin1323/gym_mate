@@ -4,12 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gym_mate/view/auth/login/login_view.dart';
 
+import '../../../services/notifications_service.dart';
+
 class SignupViewModel extends GetxController {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController cnicController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
 
   final FocusNode nameFocus = FocusNode();
   final FocusNode emailFocus = FocusNode();
@@ -57,16 +60,18 @@ class SignupViewModel extends GetxController {
     }
 
     try {
+      // Firebase Auth sign-up
       UserCredential userCredential =
           await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: emailController.text.trim(),
         password: passwordController.text.trim(),
       );
 
-      // Remove email verification step
-      // await userCredential.user!.sendEmailVerification();
+      // Fetch device token for push notifications
+      String deviceToken = await NotificationServices().getDeviceToken();
 
-      await saveUserDetails(userCredential.user!.uid);
+      // Save user details along with the device token and role in Firestore
+      await saveUserDetails(userCredential.user!.uid, deviceToken);
 
       // Notify user of successful registration
       Get.defaultDialog(
@@ -90,14 +95,15 @@ class SignupViewModel extends GetxController {
     }
   }
 
-  Future<void> saveUserDetails(String userId) async {
+  Future<void> saveUserDetails(String userId, String deviceToken) async {
     try {
       await FirebaseFirestore.instance.collection('users').doc(userId).set({
         'name': nameController.text.trim(),
         'email': emailController.text.trim(),
         'cnic': cnicController.text.trim(),
-        // Add other user details if needed
-        'createdAt': FieldValue.serverTimestamp(), // Optional: Save creation time
+        'deviceToken': deviceToken, // Save the device token
+        'role': 'User', // Save the role as User
+        'createdAt': FieldValue.serverTimestamp(),
       });
       print('User details saved successfully for user ID: $userId');
     } catch (e) {
