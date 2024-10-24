@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gym_mate/repository/user_repository/user_repository.dart';
 import 'package:gym_mate/res/colors/app_colors.dart';
-import 'package:gym_mate/view/dashboard/home/widgets/notifications_view.dart';
 import 'package:iconsax/iconsax.dart';
+
+import '../../../Notifications/notifications_view.dart';
 
 class HeaderWidget extends StatelessWidget {
   final UserController userController;
