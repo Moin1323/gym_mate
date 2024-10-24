@@ -5,7 +5,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
-import 'package:gym_mate/view/dashboard/home/widgets/notifications_view.dart';
+
+import '../view/Notifications/notifications_view.dart';
 
 class NotificationServices {
   FirebaseMessaging messaging = FirebaseMessaging.instance;
