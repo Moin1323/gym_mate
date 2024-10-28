@@ -16,6 +16,7 @@ class UserController extends GetxController {
   var equipments = <Equipment>[].obs; // Observable list for storing equipments
   var isLoading = true.obs;
   var singleExercise = Exercise(
+          id: "", // Initialize with an empty string or null
           name: "",
           instructions: [],
           category: '',
@@ -137,6 +138,7 @@ class UserController extends GetxController {
           if (doc.exists) {
             Exercise exercise =
                 Exercise.fromJson(doc.data() as Map<String, dynamic>);
+            exercise.id = doc.id; // Set the document ID from Firestore
 
             // Add exercise to the appropriate category
             categorizedExercises[category]?.add(exercise);
@@ -159,22 +161,23 @@ class UserController extends GetxController {
     }
   }
 
-  Future<void> fetchSingleExercise(String name) async {
+  Future<void> fetchSingleExercise(String id) async {
     isLoading.value = true; // Start loading
     try {
       DocumentSnapshot snapshot = await FirebaseFirestore.instance
-          .collection('Workouts')
-          .doc('gym') // Assuming you want to fetch from the 'gym' category
-          .collection('exercises')
-          .doc(name) // Use the specific exercise ID here
-          .get();
+          .collectionGroup('exercises')
+          .where(FieldPath.documentId,
+              isEqualTo: id) // Fetch by specific exercise ID
+          .get()
+          .then((querySnapshot) => querySnapshot.docs.first);
 
       if (snapshot.exists) {
         singleExercise.value =
             Exercise.fromJson(snapshot.data() as Map<String, dynamic>);
+        singleExercise.value.id = snapshot.id; // Set the document ID
         print("Fetched single exercise: ${singleExercise.value.name}");
       } else {
-        print("No exercise found for ID: $name");
+        print("No exercise found for ID: $id");
       }
     } catch (e) {
       print("Error fetching single exercise: $e");
@@ -183,8 +186,8 @@ class UserController extends GetxController {
     }
   }
 
-  Future<void> selectExercise(String name) async {
-    await fetchSingleExercise(name); // Fetch the exercise details
+  Future<void> selectExercise(String id) async {
+    await fetchSingleExercise(id); // Fetch the exercise details
 
     Get.to(() => ExerciseDetail(exercise: singleExercise.value));
   }
