@@ -1,6 +1,7 @@
 import 'package:gym_mate/models/exercise/instruction.dart';
 
 class Exercise {
+  String? id; // Unique ID for the exercise
   final String name;
   final String category;
   final String muscleGroup;
@@ -10,6 +11,7 @@ class Exercise {
   final List<Instruction> instructions;
 
   Exercise({
+    required this.id,
     required this.name,
     required this.category,
     required this.muscleGroup,
@@ -22,6 +24,7 @@ class Exercise {
   // Convert Exercise to JSON
   Map<String, dynamic> toJson() {
     return {
+      'id': id, // Include ID in JSON serialization
       'name': name,
       'category': category,
       'muscleGroup': muscleGroup,
@@ -40,6 +43,8 @@ class Exercise {
         .toList();
 
     return Exercise(
+      id: json['id'] ??
+          '', // Ensure ID is captured from JSON, default to empty string if not provided
       name: json['name'],
       category: json['category'],
       muscleGroup: json['muscleGroup'],

@@ -3,11 +3,13 @@ import 'package:gym_mate/models/exercise/instruction.dart';
 
 final List<Exercise> cardio = [
   Exercise(
+      id: "",
       name: "Jumping Jacks",
       category: "Cardio",
       muscleGroup: "Full Body",
       equipment: "None",
-      animationUrl: "https://example.com/jumping_jacks.gif",
+      animationUrl:
+          "https://images.pexels.com/photos/4839736/pexels-photo-4839736.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
       difficulty: "Beginner",
       instructions: [
         Instruction(
@@ -27,11 +29,13 @@ final List<Exercise> cardio = [
                 "Land softly on the balls of your feet to minimize impact on your knees and joints."),
       ]),
   Exercise(
+      id: "",
       name: "Burpees",
       category: "Cardio",
       muscleGroup: "Full Body",
       equipment: "None",
-      animationUrl: "https://example.com/burpees.gif",
+      animationUrl:
+          "https://images.pexels.com/photos/4753990/pexels-photo-4753990.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
       difficulty: "Intermediate",
       instructions: [
         Instruction(
@@ -54,11 +58,13 @@ final List<Exercise> cardio = [
                 "Maintain a smooth flow between movements, and breathe out as you jump up."),
       ]),
   Exercise(
+      id: "",
       name: "High Knees",
       category: "Cardio",
       muscleGroup: "Legs",
       equipment: "None",
-      animationUrl: "https://example.com/high_knees.gif",
+      animationUrl:
+          "https://images.pexels.com/photos/4720567/pexels-photo-4720567.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
       difficulty: "Beginner",
       instructions: [
         Instruction(details: "Stand tall with your feet hip-width apart."),
@@ -79,11 +85,13 @@ final List<Exercise> cardio = [
                 "Maintain a fast pace while keeping your core engaged to prevent excessive sway."),
       ]),
   Exercise(
+      id: "",
       name: "Mountain Climbers",
       category: "Cardio",
       muscleGroup: "Core",
       equipment: "None",
-      animationUrl: "https://example.com/mountain_climbers.gif",
+      animationUrl:
+          "https://images.pexels.com/photos/4720554/pexels-photo-4720554.jpeg",
       difficulty: "Intermediate",
       instructions: [
         Instruction(
@@ -106,11 +114,13 @@ final List<Exercise> cardio = [
                 "Focus on speed, but maintain proper form by keeping your core tight and shoulders stable."),
       ]),
   Exercise(
+      id: "",
       name: "Butt Kicks",
       category: "Cardio",
       muscleGroup: "Legs",
       equipment: "None",
-      animationUrl: "https://example.com/butt_kicks.gif",
+      animationUrl:
+          "https://images.pexels.com/photos/4804065/pexels-photo-4804065.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
       difficulty: "Beginner",
       instructions: [
         Instruction(details: "Start jogging in place with a controlled pace."),

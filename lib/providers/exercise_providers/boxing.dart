@@ -3,11 +3,13 @@ import 'package:gym_mate/models/exercise/instruction.dart';
 
 final List<Exercise> boxing = [
   Exercise(
+      id: "", // Empty string for ID, Firebase will assign it later
       name: "Jab-Cross Combination",
       category: "Boxing",
       muscleGroup: "Arms",
       equipment: "None",
-      animationUrl: "https://example.com/jab_cross_combination.gif",
+      animationUrl:
+          "https://images.pexels.com/photos/6295968/pexels-photo-6295968.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
       difficulty: "Beginner",
       instructions: [
         Instruction(
@@ -26,11 +28,13 @@ final List<Exercise> boxing = [
                 "Keep your non-punching hand up to protect your face, and engage your core for balance.")
       ]),
   Exercise(
+      id: "", // Empty string for ID, Firebase will assign it later
       name: "Uppercut",
       category: "Boxing",
       muscleGroup: "Arms",
       equipment: "None",
-      animationUrl: "https://example.com/uppercut.gif",
+      animationUrl:
+          "https://images.pexels.com/photos/17279419/pexels-photo-17279419/free-photo-of-photo-of-men-boxing-on-a-ring.jpeg",
       difficulty: "Intermediate",
       instructions: [
         Instruction(
@@ -52,11 +56,13 @@ final List<Exercise> boxing = [
                 "Focus on speed and precision rather than brute strength to land an effective uppercut.")
       ]),
   Exercise(
+      id: "", // Empty string for ID, Firebase will assign it later
       name: "Hook",
       category: "Boxing",
       muscleGroup: "Arms",
       equipment: "None",
-      animationUrl: "https://example.com/hook.gif",
+      animationUrl:
+          "https://images.pexels.com/photos/6920596/pexels-photo-6920596.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
       difficulty: "Intermediate",
       instructions: [
         Instruction(details: "Assume a fighting stance, with your guard up."),
@@ -77,11 +83,13 @@ final List<Exercise> boxing = [
                 "Rotate your body for more power, and avoid overextending your arm during the hook.")
       ]),
   Exercise(
+      id: "", // Empty string for ID, Firebase will assign it later
       name: "Body Shot",
       category: "Boxing",
       muscleGroup: "Core",
       equipment: "None",
-      animationUrl: "https://example.com/body_shot.gif",
+      animationUrl:
+          "https://images.pexels.com/photos/5750813/pexels-photo-5750813.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
       difficulty: "Intermediate",
       instructions: [
         Instruction(details: "Start in a fighting stance with your guard up."),
@@ -100,11 +108,13 @@ final List<Exercise> boxing = [
                 "Maintain a strong core and stay balanced during the punch to avoid leaving yourself exposed.")
       ]),
   Exercise(
+      id: "", // Empty string for ID, Firebase will assign it later
       name: "Speed Bag",
       category: "Boxing",
       muscleGroup: "Arms",
       equipment: "Speed Bag",
-      animationUrl: "https://example.com/speed_bag.gif",
+      animationUrl:
+          "https://images.pexels.com/photos/7992141/pexels-photo-7992141.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
       difficulty: "Beginner",
       instructions: [
         Instruction(
