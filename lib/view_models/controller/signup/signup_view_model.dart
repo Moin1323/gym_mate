@@ -31,8 +31,8 @@ class SignupViewModel extends GetxController {
     confirmPasswordController.dispose();
     nameFocus.dispose();
     emailFocus.dispose();
-    passwordFocus.dispose();
     cnicFocus.dispose();
+    passwordFocus.dispose();
     confirmPasswordFocus.dispose();
     super.onClose();
   }
@@ -98,12 +98,13 @@ class SignupViewModel extends GetxController {
   Future<void> saveUserDetails(String userId, String deviceToken) async {
     try {
       await FirebaseFirestore.instance.collection('users').doc(userId).set({
+        'uid': userId, // Include the uid field
         'name': nameController.text.trim(),
         'email': emailController.text.trim(),
         'cnic': cnicController.text.trim(),
-        'deviceToken': deviceToken, // Save the device token
-        'role': 'User', // Save the role as User
-        'createdAt': FieldValue.serverTimestamp(),
+        'token': deviceToken, // Save the device token as "token"
+        'role': 'User', // Save the role as "User"
+        'createdAt': FieldValue.serverTimestamp(), // Save creation date
       });
       print('User details saved successfully for user ID: $userId');
     } catch (e) {
