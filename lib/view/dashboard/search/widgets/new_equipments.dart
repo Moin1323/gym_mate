@@ -109,7 +109,7 @@ class NewEquipments extends StatelessWidget {
                       style: TextStyle(
                           color: AppColors.secondary,
                           fontWeight: FontWeight.bold,
-                          fontSize: 26),
+                          fontSize: 20),
                     ),
                     Text(
                       equipment.category,

@@ -3,11 +3,13 @@ import 'package:gym_mate/models/exercise/instruction.dart';
 
 final List<Exercise> gym = [
   Exercise(
+      id: "",
       name: "Barbell Bench Press",
       category: "Strength",
       muscleGroup: "Chest",
       equipment: "Barbell",
-      animationUrl: "https://example.com/barbell_bench_press.gif",
+      animationUrl:
+          "https://images.pexels.com/photos/14623620/pexels-photo-14623620.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
       difficulty: "Intermediate",
       instructions: [
         Instruction(
@@ -27,11 +29,13 @@ final List<Exercise> gym = [
                 "Keep your core engaged and your back flat against the bench throughout the movement.")
       ]),
   Exercise(
+      id: "",
       name: "Squats",
       category: "Strength",
       muscleGroup: "Legs",
       equipment: "Barbell",
-      animationUrl: "https://example.com/squats.gif",
+      animationUrl:
+          "https://images.pexels.com/photos/5837242/pexels-photo-5837242.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
       difficulty: "Intermediate",
       instructions: [
         Instruction(
@@ -51,11 +55,13 @@ final List<Exercise> gym = [
                 "Make sure to maintain a neutral spine throughout the squat to avoid injury.")
       ]),
   Exercise(
+      id: "",
       name: "Deadlifts",
       category: "Strength",
       muscleGroup: "Back, Legs",
       equipment: "Barbell",
-      animationUrl: "https://example.com/deadlifts.gif",
+      animationUrl:
+          "https://images.pexels.com/photos/12652601/pexels-photo-12652601.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
       difficulty: "Advanced",
       instructions: [
         Instruction(
@@ -75,11 +81,13 @@ final List<Exercise> gym = [
                 "Avoid rounding your back during the lift to reduce the risk of injury.")
       ]),
   Exercise(
+      id: "",
       name: "Dumbbell Bicep Curl",
       category: "Strength",
       muscleGroup: "Arms",
       equipment: "Dumbbells",
-      animationUrl: "https://example.com/dumbbell_bicep_curl.gif",
+      animationUrl:
+          "https://images.pexels.com/photos/6550875/pexels-photo-6550875.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
       difficulty: "Beginner",
       instructions: [
         Instruction(
@@ -98,11 +106,13 @@ final List<Exercise> gym = [
                 "Avoid using momentum; focus on engaging your biceps to lift the weights.")
       ]),
   Exercise(
+      id: "",
       name: "Lat Pulldown",
       category: "Strength",
       muscleGroup: "Back",
       equipment: "Pulldown Machine",
-      animationUrl: "https://example.com/lat_pulldown.gif",
+      animationUrl:
+          "https://images.pexels.com/photos/29084397/pexels-photo-29084397/free-photo-of-back-view-of-a-man-doing-pull-ups-in-a-gym.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
       difficulty: "Beginner",
       instructions: [
         Instruction(

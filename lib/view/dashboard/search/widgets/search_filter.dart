@@ -88,6 +88,7 @@ class _SearchFilterState extends State<SearchFilter> {
                         var document = filteredDocs[index];
 
                         // Assuming the document has the following fields
+                        String id = document.id; // Fetching the unique ID
                         String name = document['name'] ?? 'No name';
                         String category = document['category'] ?? 'No category';
                         String muscleGroup =
@@ -102,8 +103,9 @@ class _SearchFilterState extends State<SearchFilter> {
                                     Instruction.fromJson(instruction))
                                 .toList();
 
-                        // Create Exercise object
+                        // Create Exercise object with ID
                         Exercise exercise = Exercise(
+                          id: id, // Add the unique ID here
                           name: name,
                           category: category,
                           muscleGroup: muscleGroup,

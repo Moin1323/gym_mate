@@ -4,22 +4,26 @@ import 'package:gym_mate/models/equipments/equipments.dart';
 class EquipmentService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  // TO UPLOAD DATA
   void uploadAllEquipments(List<Equipment> equipments) {
     for (var equipment in equipments) {
-      _firestore
-          .collection(
-              "Equipments") // Make sure the collection name matches exactly
-          .add(equipment.toJson())
-          .then((_) {
-        print("Equipment '${equipment.name}' uploaded successfully!");
+      final docRef = _firestore.collection("Equipments").doc();
+      final newEquipment = Equipment(
+        id: docRef.id,
+        name: equipment.name,
+        description: equipment.description,
+        category: equipment.category,
+        imageUrl: equipment.imageUrl,
+        availableSizes: equipment.availableSizes,
+      );
+
+      docRef.set(newEquipment.toJson()).then((_) {
+        print("Equipment '${newEquipment.name}' uploaded successfully!");
       }).catchError((error) {
-        print("Failed to upload equipment '${equipment.name}': $error");
+        print("Failed to upload equipment '${newEquipment.name}': $error");
       });
     }
   }
 
-  // TO FETCH DATA
   Future<List<Equipment>> fetchAllEquipments() async {
     List<Equipment> equipmentList = [];
 
@@ -32,6 +36,7 @@ class EquipmentService {
         Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
 
         Equipment equipment = Equipment(
+          id: doc.id, // Set ID from document ID
           name: data['name'],
           description: data['description'],
           category: data['category'],

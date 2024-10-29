@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:gym_mate/models/login/user_model.dart';
 import 'package:gym_mate/repository/login_repository/login_repository.dart';
 import 'package:gym_mate/view/dashboard/bottom_navigation_bar.dart';
 import 'package:gym_mate/view_models/controller/home_controller.dart';
@@ -36,6 +38,41 @@ class LoginViewModel extends GetxController {
         );
         print("Login successful, User: ${userCredential.user?.email}");
 
+        // Fetch user details from Firestore
+        final userId = userCredential.user?.uid;
+        if (userId != null) {
+          final userDoc = await FirebaseFirestore.instance
+              .collection('users')
+              .doc(userId)
+              .get();
+
+          if (userDoc.exists) {
+            // Parse Firestore document into UserModel
+            UserModel userModel =
+                UserModel.fromJson(userDoc.data() as Map<String, dynamic>);
+            print(
+                "Fetched User Details: ${userModel.name}, UID: ${userModel.uid}, Role: ${userModel.role}");
+
+            // Check if the role matches the required role for this app
+            if (userModel.role != "User") {
+              // If the role is not "user", show an error and sign out
+              Get.snackbar(
+                'Access Denied',
+                'This account is not authorized to access the user app.',
+                backgroundColor: Colors.red,
+                colorText: Colors.white,
+              );
+
+              // Sign out to prevent unauthorized access
+              await _auth.signOut();
+              loading.value = false;
+              return;
+            }
+
+            // Store user details or proceed with additional steps if needed
+          }
+        }
+
         // Clear email and password fields after successful login
         clearFields();
 
@@ -50,7 +87,6 @@ class LoginViewModel extends GetxController {
         // Navigate to the BottomNavigationBar (main dashboard)
         Get.offAll(() => const BottomNavigationbar());
       } on FirebaseAuthException catch (e) {
-        // Firebase-specific error handling
         Get.snackbar(
           'Login Error',
           e.message ?? 'Login failed',
@@ -58,11 +94,8 @@ class LoginViewModel extends GetxController {
           colorText: Colors.white,
         );
         print("FirebaseAuthException: ${e.message}");
-
-        // Clear only password on login error to avoid retyping email
         passwordController.clear();
       } catch (e) {
-        // General error handling
         Get.snackbar(
           'Error',
           'Something went wrong. Please try again later.',
@@ -71,10 +104,9 @@ class LoginViewModel extends GetxController {
         );
         print("General Error during login: $e");
       } finally {
-        loading.value = false; // Stop the loading indicator
+        loading.value = false;
       }
     } else {
-      // Input validation error when fields are empty
       Get.snackbar(
         'Input Error',
         'Please enter both email and password',

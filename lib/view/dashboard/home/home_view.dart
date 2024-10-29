@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gym_mate/repository/user_repository/user_repository.dart';
 import 'package:gym_mate/res/colors/app_colors.dart';
+import 'package:gym_mate/services/exercise_service.dart';
 import 'package:gym_mate/services/notifications_service.dart';
 import 'package:gym_mate/view/dashboard/home/widgets/banner_widget.dart';
 import 'package:gym_mate/view/dashboard/home/widgets/best_programs_section_widget.dart';
@@ -21,6 +22,7 @@ class _HomeViewState extends State<HomeView> {
   final UserController userController = Get.put(UserController());
   NotificationServices notificationServices = NotificationServices();
 
+  ExerciseService exerciseService = ExerciseService();
   @override
   void initState() {
     super.initState();
@@ -43,13 +45,17 @@ class _HomeViewState extends State<HomeView> {
       length: 3, // Number of tabs
       child: Scaffold(
         backgroundColor: AppColors.background,
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          toolbarHeight: 0, // Make it minimally visible
+        ),
         body: Padding(
-          padding: const EdgeInsets.all(10.0),
+          padding: const EdgeInsets.symmetric(horizontal: 10.0),
           child: Column(
             children: [
-              const SizedBox(height: 10),
               HeaderWidget(userController: userController),
-              const SizedBox(height: 10),
+              const SizedBox(height: 5),
               const BannerWidget(),
               const SizedBox(height: 10),
               const TabBarWidget(),
@@ -58,6 +64,9 @@ class _HomeViewState extends State<HomeView> {
             ],
           ),
         ),
+        floatingActionButton: FloatingActionButton(onPressed: () {
+          exerciseService.uploadAllExercises();
+        }),
       ),
     );
   }

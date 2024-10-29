@@ -6,16 +6,17 @@ import 'package:gym_mate/models/login/user_model.dart';
 import 'package:gym_mate/view/auth/login/login_view.dart';
 import 'package:gym_mate/view/dashboard/Exercieses/excersice_datail.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:gym_mate/models/equipments/equipments.dart'; // Import your Equipment model
-import 'package:gym_mate/services/equipment_service.dart'; // Import the EquipmentService
+import 'package:gym_mate/models/equipments/equipments.dart';
+import 'package:gym_mate/services/equipment_service.dart';
 
 class UserController extends GetxController {
+  // Observable fields
   var user = UserModel().obs;
-  var exercises =
-      <String, List<Exercise>>{}.obs; // For storing categorized exercises
-  var equipments = <Equipment>[].obs; // Observable list for storing equipments
+  var exercises = <String, List<Exercise>>{}.obs;
+  var equipments = <Equipment>[].obs;
   var isLoading = true.obs;
   var singleExercise = Exercise(
+          id: "",
           name: "",
           instructions: [],
           category: '',
@@ -23,26 +24,23 @@ class UserController extends GetxController {
           equipment: '',
           animationUrl: '',
           difficulty: '')
-      .obs; // For storing a single exercise
+      .obs;
 
-  final EquipmentService _equipmentService =
-      EquipmentService(); // Initialize EquipmentService
+  final EquipmentService _equipmentService = EquipmentService();
 
   @override
   void onInit() {
     super.onInit();
     fetchUserData();
     fetchAllExercises();
-    fetchAllEquipments(); // Fetch equipments on initialization
+    fetchAllEquipments();
   }
 
-  // New method to fetch all equipments
+  // Method to fetch all equipments
   Future<void> fetchAllEquipments() async {
-    isLoading.value = true; // Start loading
+    isLoading.value = true;
     try {
-      List<Equipment> equipmentList =
-          await _equipmentService.fetchAllEquipments();
-      equipments.value = equipmentList; // Update the observable variable
+      equipments.value = await _equipmentService.fetchAllEquipments();
       print("Equipments fetched successfully: ${equipments.value}");
     } catch (e) {
       print("Error fetching equipments: $e");
@@ -52,32 +50,35 @@ class UserController extends GetxController {
         snackPosition: SnackPosition.BOTTOM,
       );
     } finally {
-      isLoading.value = false; // Stop loading
+      isLoading.value = false;
     }
   }
 
+  // Method to fetch user data
   Future<void> fetchUserData() async {
-    isLoading.value = true; // Start loading
+    isLoading.value = true;
     try {
       User? currentUser = FirebaseAuth.instance.currentUser;
 
       if (currentUser != null) {
         String userId = currentUser.uid;
-        print("Current User ID: $userId");
-
         DocumentSnapshot snapshot = await FirebaseFirestore.instance
             .collection('users')
             .doc(userId)
             .get();
 
         if (snapshot.exists) {
-          user.value =
+          UserModel fetchedUser =
               UserModel.fromJson(snapshot.data() as Map<String, dynamic>);
+          fetchedUser.uid = userId;
+          user.value = fetchedUser;
+          print(
+              "Fetched User Details: ${user.value.name}, UID: ${user.value.uid}");
         } else {
-          await _handleLogout(); // Handle logout if user data does not exist
+          await _handleLogout();
         }
       } else {
-        await _handleLogout(); // Handle logout if no user is signed in
+        await _handleLogout();
       }
     } catch (e) {
       print("Error fetching user data: $e");
@@ -86,106 +87,88 @@ class UserController extends GetxController {
         "Failed to fetch user data. Please try again.",
         snackPosition: SnackPosition.BOTTOM,
       );
-      await _handleLogout(); // Handle logout on error
+      await _handleLogout();
     } finally {
-      isLoading.value = false; // Stop loading
+      isLoading.value = false;
     }
   }
 
+  // Handle logout functionality
   Future<void> _handleLogout() async {
-    // Sign out the user
     await FirebaseAuth.instance.signOut();
-    // Optionally clear shared preferences for login status
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool('isLoggedIn', false);
-    // Redirect to login view
-    Get.offAll(() => const LoginView()); // Ensure to import your login view
+    Get.offAll(() => const LoginView());
   }
 
+  // Method to fetch all exercises for different categories
   Future<void> fetchAllExercises() async {
-    isLoading.value = true; // Start loading
+    isLoading.value = true;
     try {
-      // Initialize categorized exercises
       Map<String, List<Exercise>> categorizedExercises = {
         "boxing": [],
         "gym": [],
         "cardio": [],
       };
 
-      // List of workout categories to fetch exercises from
+      // Define workout categories
       List<String> categories = ['boxing', 'gym', 'cardio'];
 
-      // Loop through each category and fetch exercises
       for (String category in categories) {
-        print("Fetching exercises for $category..."); // Debugging log
-
-        // Access the subcollection 'exercises' under each category
         QuerySnapshot snapshot = await FirebaseFirestore.instance
             .collection('Workouts')
             .doc(category)
             .collection('exercises')
             .get();
 
-        // Check if snapshot has documents
-        if (snapshot.docs.isEmpty) {
-          print("No exercises found for $category."); // Debugging log
-          continue;
-        }
+        if (snapshot.docs.isEmpty) continue;
 
-        // Loop through the fetched documents
         for (var doc in snapshot.docs) {
           if (doc.exists) {
             Exercise exercise =
                 Exercise.fromJson(doc.data() as Map<String, dynamic>);
-
-            // Add exercise to the appropriate category
+            exercise.id = doc.id;
             categorizedExercises[category]?.add(exercise);
-            print(
-                "Added exercise: ${exercise.name} to $category"); // Debugging log
-          } else {
-            print(
-                "Document ${doc.id} in $category has no data."); // Debugging log
           }
         }
       }
-
-      // Update the observable variable
       exercises.value = categorizedExercises;
       print("Exercises fetched successfully: ${exercises.value}");
     } catch (e) {
       print("Error fetching exercises: $e");
     } finally {
-      isLoading.value = false; // Stop loading
+      isLoading.value = false;
     }
   }
 
-  Future<void> fetchSingleExercise(String name) async {
-    isLoading.value = true; // Start loading
+  // Method to fetch a single exercise by ID
+  Future<void> fetchSingleExercise(String id) async {
+    isLoading.value = true;
     try {
-      DocumentSnapshot snapshot = await FirebaseFirestore.instance
-          .collection('Workouts')
-          .doc('gym') // Assuming you want to fetch from the 'gym' category
-          .collection('exercises')
-          .doc(name) // Use the specific exercise ID here
+      QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+          .collectionGroup('exercises')
+          .where(FieldPath.documentId, isEqualTo: id)
           .get();
 
-      if (snapshot.exists) {
+      if (querySnapshot.docs.isNotEmpty) {
+        DocumentSnapshot snapshot = querySnapshot.docs.first;
         singleExercise.value =
             Exercise.fromJson(snapshot.data() as Map<String, dynamic>);
+        singleExercise.value.id = snapshot.id;
         print("Fetched single exercise: ${singleExercise.value.name}");
       } else {
-        print("No exercise found for ID: $name");
+        print("No exercise found for ID: $id");
       }
     } catch (e) {
       print("Error fetching single exercise: $e");
     } finally {
-      isLoading.value = false; // Stop loading
+      isLoading.value = false;
     }
   }
 
-  Future<void> selectExercise(String name) async {
-    await fetchSingleExercise(name); // Fetch the exercise details
-
+  // Navigate to Exercise Detail page with the selected exercise
+  Future<void> selectExercise(String id) async {
+    await fetchSingleExercise(id);
     Get.to(() => ExerciseDetail(exercise: singleExercise.value));
   }
 }
