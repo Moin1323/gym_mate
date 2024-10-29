@@ -17,7 +17,7 @@ class _NotificationsViewState extends State<NotificationsView> {
   // Function to get the current user's ID
   Future<String?> _getCurrentUserId() async {
     User? user = _auth.currentUser;
-    return user?.uid; // Returns the UID of the logged-in user
+    return user?.uid;
   }
 
   // Function to delete a notification from Firestore
@@ -38,27 +38,28 @@ class _NotificationsViewState extends State<NotificationsView> {
       appBar: AppBar(
         backgroundColor: AppColors.background,
         iconTheme: IconThemeData(
-          color: AppColors.secondary, // Set the leading arrow color
+          color: AppColors.secondary,
         ),
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Notifications',
-              style: TextStyle(
-                color: AppColors.secondary,
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
+        title: Center(
+          child: Row(
+            children: [
+              const SizedBox(width: 30),
+              Text(
+                'Notifications',
+                style: TextStyle(
+                  color: AppColors.secondary,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-            const SizedBox(width: 5),
-            Icon(
-              Icons.notifications,
-              color: AppColors.secondary,
-            ),
-          ],
+              const SizedBox(width: 5),
+              Icon(
+                Icons.notifications,
+                color: AppColors.secondary,
+              ),
+            ],
+          ),
         ),
-        centerTitle: true, // Align title to the center
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -138,7 +139,7 @@ class _NotificationsViewState extends State<NotificationsView> {
                           // Show a Snackbar to notify the user
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
-                              duration: Duration(seconds: 1),
+                              duration: const Duration(seconds: 1),
                               content: Center(
                                 child: Text(
                                   'Notification deleted',
