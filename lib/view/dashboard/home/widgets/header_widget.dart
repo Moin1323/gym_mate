@@ -15,7 +15,7 @@ class HeaderWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding:
-          const EdgeInsets.only(top: 30.0, left: 10, right: 10, bottom: 10),
+          const EdgeInsets.only(top: 10.0, left: 10, right: 10, bottom: 10),
       child: Row(
         children: [
           Obx(() {
