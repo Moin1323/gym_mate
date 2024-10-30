@@ -30,7 +30,7 @@ class BestProgramsSectionWidget extends StatelessWidget {
         Container(
           height: Get.height * 0.1,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
+            borderRadius: BorderRadius.circular(20),
             color: AppColors.secondary.withOpacity(0.2),
           ),
           // You can add dynamic content here for the best programs

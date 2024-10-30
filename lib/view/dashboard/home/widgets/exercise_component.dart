@@ -80,7 +80,7 @@ class PopularTrainings extends StatelessWidget {
       child: Stack(
         children: [
           ClipRRect(
-            borderRadius: BorderRadius.circular(18),
+            borderRadius: BorderRadius.circular(20),
             child: Container(
               height: cardHeight,
               width: cardWidth,

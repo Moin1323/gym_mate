@@ -71,7 +71,7 @@ class NewEquipments extends StatelessWidget {
       child: Stack(
         children: [
           ClipRRect(
-            borderRadius: BorderRadius.circular(18),
+            borderRadius: BorderRadius.circular(20),
             child: Container(
               height: Get.height * 0.30,
               width: Get.width * 0.4,
