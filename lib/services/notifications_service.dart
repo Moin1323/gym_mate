@@ -1,8 +1,9 @@
 import 'dart:math';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 
@@ -59,18 +60,21 @@ class NotificationServices {
   // Firebase message listener
   void firebaseInit() {
     FirebaseMessaging.onMessage.listen((message) {
-      // App is in the foreground and a notification is received
-      if (kDebugMode) {
-        print(message.notification!.title.toString());
-        print(message.notification!.body.toString());
-      }
+      _saveNotificationToFirestore(message);
       showNotification(message);
     });
 
-    // Handle when the app is opened from a notification (background/terminated state)
-    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-      // Navigate to HomeView when the app is opened from a notification
+    FirebaseMessaging.onMessageOpenedApp.listen((message) {
+      _saveNotificationToFirestore(message);
       Get.to(() => const NotificationsView());
+    });
+
+    // Fetch the initial message when the app is opened from a terminated state
+    FirebaseMessaging.instance.getInitialMessage().then((message) {
+      if (message != null) {
+        _saveNotificationToFirestore(message);
+        Get.to(() => const NotificationsView());
+      }
     });
   }
 
@@ -115,6 +119,23 @@ class NotificationServices {
   void isTokenRefresh() async {
     messaging.onTokenRefresh.listen((event) {
       print('Token refreshed: $event');
+    });
+  }
+
+  // Save notification to Firestore
+  Future<void> _saveNotificationToFirestore(RemoteMessage message) async {
+    // Get the current user's ID
+    final userId = FirebaseAuth.instance.currentUser?.uid;
+    if (userId == null) return; // Ensure user is logged in
+
+    await FirebaseFirestore.instance
+        .collection('notifications')
+        .doc(userId)
+        .collection('user_notifications')
+        .add({
+      'title': message.notification?.title ?? 'No title',
+      'body': message.notification?.body ?? 'No body',
+      'timestamp': FieldValue.serverTimestamp(),
     });
   }
 }
