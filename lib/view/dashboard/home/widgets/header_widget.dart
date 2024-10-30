@@ -51,13 +51,17 @@ class HeaderWidget extends StatelessWidget {
             onTap: () {
               Get.to(const NotificationsView());
             },
-            child: CircleAvatar(
-              radius: 25,
-              backgroundColor: AppColors.secondary.withOpacity(0.2),
-              child: Icon(
-                Iconsax.notification,
-                size: 20,
-                color: AppColors.secondary,
+            child: Container(
+              decoration: BoxDecoration(
+                  color: AppColors.secondary.withOpacity(0.2),
+                  borderRadius: BorderRadius.circular(20)),
+              child: Padding(
+                padding: const EdgeInsets.all(14.0),
+                child: Icon(
+                  Iconsax.notification,
+                  size: 22,
+                  color: AppColors.secondary,
+                ),
               ),
             ),
           ),

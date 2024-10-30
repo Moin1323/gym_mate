@@ -20,7 +20,7 @@ class TabrComponent extends StatelessWidget {
         decoration: BoxDecoration(
           color: AppColors.secondary
               .withOpacity(0.2), // Background color for the container
-          borderRadius: BorderRadius.circular(30), // Rounded corners
+          borderRadius: BorderRadius.circular(20), // Rounded corners
         ),
         child: Padding(
           padding: const EdgeInsets.all(3.0),

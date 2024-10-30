@@ -33,7 +33,7 @@ class _SearchTextfeildState extends State<SearchTextfeild> {
         hintText: "Search workout..",
         hintStyle: const TextStyle(color: Colors.grey), // Hint text color
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(27), // Rounded corners
+          borderRadius: BorderRadius.circular(20), // Rounded corners
           borderSide:
               const BorderSide(color: Colors.grey), // Border color when enabled
         ),

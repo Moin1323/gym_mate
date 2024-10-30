@@ -25,7 +25,7 @@ class _Search_ConatinerState extends State<Search_Conatiner> {
           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
           decoration: BoxDecoration(
             color: AppColors.background,
-            borderRadius: BorderRadius.circular(27), // Rounded corners
+            borderRadius: BorderRadius.circular(20), // Rounded corners
             border: Border.all(
               color: Colors.grey,
               width: 1.0, // Border width

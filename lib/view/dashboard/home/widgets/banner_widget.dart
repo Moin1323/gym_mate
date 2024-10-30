@@ -13,7 +13,7 @@ class BannerWidget extends StatelessWidget {
       width: Get.width * 0.9,
       decoration: BoxDecoration(
         color: AppColors.primary,
-        borderRadius: BorderRadius.circular(15),
+        borderRadius: BorderRadius.circular(20),
       ),
       child: Padding(
         padding: const EdgeInsets.all(25.0),
