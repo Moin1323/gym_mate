@@ -12,8 +12,11 @@ import 'package:gym_mate/view/dashboard/home/widgets/tab_bar_view_widget.dart';
 import 'package:gym_mate/view/dashboard/home/widgets/tab_bar_widget.dart';
 
 class HomeView extends StatefulWidget {
-  const HomeView({super.key});
-
+  final UserController userController;
+  const HomeView({
+    super.key,
+    required this.userController,
+  });
   @override
   State<HomeView> createState() => _HomeViewState();
 }
@@ -30,8 +33,6 @@ class _HomeViewState extends State<HomeView> {
   }
 
   Future<void> _initializeData() async {
-    await userController.fetchUserData();
-    await userController.fetchAllExercises();
     notificationServices.requestNotificationPermission();
     notificationServices.initLocalNotifications(context, const RemoteMessage());
     notificationServices.firebaseInit();

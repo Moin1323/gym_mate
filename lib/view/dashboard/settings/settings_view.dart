@@ -99,11 +99,11 @@ class _SettingsViewState extends State<SettingsView> {
                             trailingIcon: Icons.chevron_right,
                             destinationScreen: ForgotPasswordView(),
                           ),
-                          AccountTile(
+                          const AccountTile(
                             accountName: 'Notifications',
                             leadingIcon: Icons.notifications,
                             trailingIcon: Icons.chevron_right,
-                            destinationScreen: const NotificationsView(),
+                            destinationScreen: NotificationsView(),
                           ),
                           AccountTile(
                             accountName: 'Log out',

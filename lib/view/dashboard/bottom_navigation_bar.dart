@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:gym_mate/repository/user_repository/user_repository.dart';
 import 'package:gym_mate/res/colors/app_colors.dart';
+import 'package:gym_mate/res/theme/app_theme.dart';
 import 'package:gym_mate/view/dashboard/search/search_view.dart';
 import 'package:gym_mate/view_models/controller/home_controller.dart';
 import 'package:iconsax/iconsax.dart';
@@ -16,13 +18,27 @@ class BottomNavigationbar extends StatefulWidget {
 }
 
 class _BottomNavigationbarState extends State<BottomNavigationbar> {
+  final UserController userController = Get.put(UserController());
   final HomeController homeController = Get.put(HomeController());
 
-  final List<Widget> _screens = [
-    const HomeView(),
-    const SearchView(),
-    const SettingsView(),
-  ];
+  // List of screens
+  late final List<Widget> _screens;
+
+  @override
+  void initState() {
+    super.initState();
+    userController.fetchUserData();
+    userController.fetchAllExercises();
+    userController.fetchAllEquipments();
+    AppThemes.setStatusBarStyle();
+
+    // Initialize _screens here
+    _screens = [
+      HomeView(userController: userController), // Pass the instance here
+      SearchView(userController: userController),
+      const SettingsView(),
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {
