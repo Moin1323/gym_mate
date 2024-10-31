@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:gym_mate/res/assets/image_assets.dart';
 import 'package:gym_mate/res/colors/app_colors.dart';
 import 'package:gym_mate/res/routes/routes_name.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:gym_mate/res/theme/app_theme.dart';
 
 class SplashView extends StatefulWidget {
   const SplashView({super.key});
@@ -16,6 +18,7 @@ class _SplashViewState extends State<SplashView> {
   void initState() {
     super.initState();
     _navigateBasedOnAuthStatus(); // Navigate based on authentication status
+    AppThemes.setStatusBarStyle();
   }
 
   void _navigateBasedOnAuthStatus() async {
@@ -38,8 +41,14 @@ class _SplashViewState extends State<SplashView> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.primary,
-      body: const Center(
-        child: CircularProgressIndicator(color: Colors.white),
+      body: Padding(
+        padding: const EdgeInsets.all(30.0),
+        child: Center(
+          child: Image.asset(
+            ImageAssets.logo,
+            color: AppColors.background,
+          ),
+        ),
       ),
     );
   }

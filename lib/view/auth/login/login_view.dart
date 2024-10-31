@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gym_mate/res/assets/image_assets.dart';
 import 'package:gym_mate/res/colors/app_colors.dart';
+import 'package:gym_mate/res/theme/app_theme.dart';
 import 'package:gym_mate/utils/utils.dart';
 import 'package:gym_mate/view/auth/forgetPassword/forget_password_view.dart';
 import 'package:gym_mate/view/auth/signup/signup_view.dart';
@@ -19,6 +20,12 @@ class LoginView extends StatefulWidget {
 class _LoginViewState extends State<LoginView> {
   final loginVM = Get.put(LoginViewModel());
   final formKey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    super.initState();
+    AppThemes.setStatusBarStyle();
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -4,9 +4,9 @@ import 'package:gym_mate/res/colors/app_colors.dart';
 
 class AppThemes {
   static void setStatusBarStyle() {
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       statusBarIconBrightness: Brightness.light,
-      statusBarColor: AppColors.background,
+      statusBarColor: Colors.transparent,
     ));
   }
 

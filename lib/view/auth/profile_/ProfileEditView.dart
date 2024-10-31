@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:gym_mate/res/colors/app_colors.dart';
 import 'package:gym_mate/res/components/custom_text_field.dart';
 import 'package:gym_mate/view_models/controller/profile_controller.dart';
+import 'package:gym_mate/res/routes/routes_name.dart';
 
 class ProfileEditView extends StatelessWidget {
   final ProfileController profileController = Get.put(ProfileController());
@@ -68,8 +69,39 @@ class ProfileEditView extends StatelessWidget {
             const SizedBox(height: 40),
             Center(
               child: ElevatedButton(
-                onPressed: () {
-                  profileController.updateProfile();
+                onPressed: () async {
+                  // Show confirmation dialog before updating
+                  bool? confirmChange = await Get.dialog<bool>(
+                    AlertDialog(
+                      title: const Text('Confirm Changes'),
+                      content: const Text(
+                          'Are you sure you want to change the details?'),
+                      actions: [
+                        TextButton(
+                          onPressed: () => Get.back(result: false),
+                          child: const Text('Cancel'),
+                        ),
+                        TextButton(
+                          onPressed: () => Get.back(result: true),
+                          child: const Text('Yes, Change'),
+                        ),
+                      ],
+                    ),
+                  );
+
+                  if (confirmChange == true) {
+                    // Optional: Close any currently active snackbar
+                    if (Get.isSnackbarOpen) {
+                      Get.closeCurrentSnackbar();
+                    }
+
+                    // Call the updateProfile method from the ProfileController
+                    await profileController.updateProfile();
+
+                    // Refresh the app by navigating to the initial screen (replace '/home_view' with your main screen route)
+                    Get.offAllNamed(RoutesName
+                        .bottomNavigationBar); // Adjust the route name as necessary
+                  }
                 },
                 style: ElevatedButton.styleFrom(
                   padding:

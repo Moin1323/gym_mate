@@ -4,7 +4,6 @@ import 'package:gym_mate/res/routes/routes_name.dart';
 import 'package:gym_mate/view/auth/login/login_view.dart';
 import 'package:gym_mate/view/auth/signup/signup_view.dart';
 import 'package:gym_mate/view/dashboard/bottom_navigation_bar.dart';
-import 'package:gym_mate/view/dashboard/home/home_view.dart';
 import 'package:gym_mate/view/splash/splash_view.dart';
 
 class AppRoutes {
@@ -24,12 +23,6 @@ class AppRoutes {
         GetPage(
           name: RoutesName.signUpView,
           page: () => const SignupView(),
-          transitionDuration: const Duration(milliseconds: 250),
-          transition: Transition.leftToRightWithFade,
-        ),
-        GetPage(
-          name: RoutesName.homeView,
-          page: () => const HomeView(),
           transitionDuration: const Duration(milliseconds: 250),
           transition: Transition.leftToRightWithFade,
         ),

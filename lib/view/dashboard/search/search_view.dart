@@ -2,15 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gym_mate/repository/user_repository/user_repository.dart';
 import 'package:gym_mate/res/colors/app_colors.dart';
+import 'package:gym_mate/res/theme/app_theme.dart';
 import 'package:gym_mate/view/dashboard/search/widgets/new_equipments.dart';
 import 'package:gym_mate/view/dashboard/search/widgets/podcast.dart';
 import 'package:gym_mate/view/dashboard/search/widgets/search_container.dart';
 
 class SearchView extends StatelessWidget {
-  const SearchView({super.key});
-
+  final UserController userController;
+  const SearchView({
+    super.key,
+    required this.userController,
+  });
   @override
   Widget build(BuildContext context) {
+    AppThemes.setStatusBarStyle();
+
     // Initialize UserController
     final UserController userController = Get.put(UserController());
 
